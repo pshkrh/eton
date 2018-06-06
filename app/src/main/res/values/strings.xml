@@ -6,4 +6,16 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="notes">Notes</string>
+    <string name="bin">Bin</string>
+    <string name="export">Export</string>
+    <string name="star">Star</string>
+    <string name="sort">Sort</string>
+    <string name="sort_alphabetical">Sort Alphabetically</string>
+    <string name="sort_ascending">Sort by Date (Ascending)</string>
+    <string name="sort_descending">Sort by Date (Descending)</string>
+    <string name="application">Application</string>
+    <string name="about">About</string>
+    <string name="settings">Settings</string>
+    <string name="search">Search</string>
 </resources>
