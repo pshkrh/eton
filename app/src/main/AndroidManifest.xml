@@ -30,7 +30,11 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".BinActivity"></activity>
+        <activity
+            android:name=".BinActivity"
+            android:label="@string/bin"
+            android:theme="@style/NoActionBar">
+        </activity>
     </application>
 
 </manifest>

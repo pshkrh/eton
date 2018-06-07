@@ -25,4 +25,6 @@
     <string name="search_hint">Search notes</string>
     <string name="already_here">You are already here!</string>
     <string name="coming_soon">Export functionality coming soon!</string>
+    <string name="bin_empty">There\'s nothing in the Bin.</string>
+    <string name="delete_all">Delete All</string>
 </resources>

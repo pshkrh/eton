@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setCheckedItem(R.id.nav_notes);
 
         Menu menu = navigationView.getMenu();
 
@@ -147,10 +146,10 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_notes) {
             Snackbar.make(findViewById(R.id.coordinator),R.string.already_here,Snackbar.LENGTH_LONG).show();
         } else if (id == R.id.nav_bin) {
-
+            Intent intent = new Intent(MainActivity.this, BinActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_export) {
             Snackbar.make(findViewById(R.id.coordinator),R.string.coming_soon,Snackbar.LENGTH_LONG).show();
-            item.setChecked(false);
         } else if (id == R.id.nav_about) {
 
         } else if(id == R.id.nav_contact) {
@@ -168,7 +167,7 @@ public class MainActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        return true;
+        return false;
     }
 
     private void applyFontToMenuItem(MenuItem mi) {
