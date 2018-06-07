@@ -27,4 +27,7 @@
     <string name="coming_soon">Export functionality coming soon!</string>
     <string name="bin_empty">There\'s nothing in the Bin.</string>
     <string name="delete_all">Delete All</string>
+    <string name="title">Add a Title</string>
+    <string name="description">Add a Description</string>
+    <string name="add_note">Add Note</string>
 </resources>

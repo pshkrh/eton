@@ -34,8 +34,13 @@
             android:name=".BinActivity"
             android:label="@string/bin"
             android:theme="@style/NoActionBar" />
-        <activity android:name=".AddActivity" />
-        <activity android:name=".EditActivity"></activity>
+
+        <activity android:name=".AddActivity"
+            android:label="@string/add_note"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="adjustResize"/>
+
+        <activity android:name=".EditActivity"/>
     </application>
 
 </manifest>
