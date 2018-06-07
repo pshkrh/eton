@@ -5,13 +5,13 @@
         android:id="@+id/action_search"
         android:orderInCategory="0"
         android:title="@string/search"
-        android:icon="@drawable/ic_magnify_white_24dp"
+        android:icon="@drawable/magnify"
         app:showAsAction="ifRoom|collapseActionView" />
     <item
         android:id="@+id/action_sort"
         android:orderInCategory="1"
         android:title="@string/sort"
-        android:icon="@drawable/ic_sort_variant_white_24dp"
+        android:icon="@drawable/sort_variant"
         app:showAsAction="ifRoom|withText">
 
         <menu>
@@ -20,21 +20,21 @@
                 android:id="@+id/action_sort_alphabetical"
                 android:orderInCategory="0"
                 android:title="@string/sort_alphabetical"
-                android:icon="@drawable/ic_sort_alphabetical_black_24dp"
+                android:icon="@drawable/sort_alphabetical"
                 app:showAsAction="withText"/>
 
             <item
                 android:id="@+id/action_sort_ascending"
                 android:orderInCategory="0"
                 android:title="@string/sort_ascending"
-                android:icon="@drawable/ic_sort_ascending_black_24dp"
+                android:icon="@drawable/sort_ascending"
                 app:showAsAction="withText"/>
 
             <item
                 android:id="@+id/action_sort_descending"
                 android:orderInCategory="0"
                 android:title="@string/sort_descending"
-                android:icon="@drawable/ic_sort_descending_black_24dp"
+                android:icon="@drawable/sort_descending"
                 app:showAsAction="withText"/>
         </menu>
 
@@ -43,6 +43,6 @@
         android:id="@+id/action_star"
         android:orderInCategory="2"
         android:title="@string/star"
-        android:icon="@drawable/ic_star_white_24dp"
+        android:icon="@drawable/star_outline"
         app:showAsAction="ifRoom|withText"/>
 </menu>

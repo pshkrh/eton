@@ -9,15 +9,15 @@
             <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/nav_notes"
-                    android:icon="@drawable/ic_note_multiple_black_24dp"
+                    android:icon="@drawable/note_multiple"
                     android:title="@string/notes" />
                 <item
                     android:id="@+id/nav_bin"
-                    android:icon="@drawable/ic_delete_black_24dp"
+                    android:icon="@drawable/delete"
                     android:title="@string/bin" />
                 <item
                     android:id="@+id/nav_export"
-                    android:icon="@drawable/ic_file_export_black_24dp"
+                    android:icon="@drawable/file_export"
                     android:title="@string/export" />
             </group>
 
@@ -30,7 +30,7 @@
             <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/nav_about"
-                    android:icon="@drawable/ic_information_black_24dp"
+                    android:icon="@drawable/information"
                     android:title="@string/about" />
                 <item
                     android:id="@+id/nav_contact"
@@ -38,7 +38,7 @@
                     android:title="@string/contact" />
                 <item
                     android:id="@+id/nav_settings"
-                    android:icon="@drawable/ic_settings_black_24dp"
+                    android:icon="@drawable/settings"
                     android:title="@string/settings" />
             </group>
         </menu>
