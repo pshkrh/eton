@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.util.Log;
 import android.view.SubMenu;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -21,6 +22,8 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    public static String TAG = "MainActivity";
 
     int imp=0;
 
@@ -83,6 +86,16 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
+        //Apply Raleway font to Sort menu
+        MenuItem menuItem = menu.getItem(1);
+        SubMenu subMenu = menuItem.getSubMenu();
+        if (subMenu!=null && subMenu.size() >0 ) {
+            for (int j=0; j <subMenu.size();j++) {
+                MenuItem subMenuItem = subMenu.getItem(j);
+                applyFontToMenuItem(subMenuItem);
+            }
+        }
         return true;
     }
 
