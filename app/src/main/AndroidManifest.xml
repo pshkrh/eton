@@ -33,8 +33,9 @@
         <activity
             android:name=".BinActivity"
             android:label="@string/bin"
-            android:theme="@style/NoActionBar">
-        </activity>
+            android:theme="@style/NoActionBar" />
+        <activity android:name=".AddActivity" />
+        <activity android:name=".EditActivity"></activity>
     </application>
 
 </manifest>
