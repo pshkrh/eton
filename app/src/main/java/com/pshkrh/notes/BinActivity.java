@@ -1,24 +1,36 @@
 package com.pshkrh.notes;
 
+import android.support.v7.app.ActionBar;
+import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Spannable;
+import android.text.SpannableString;
+import com.pshkrh.notes.TypefaceSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 
 public class BinActivity extends AppCompatActivity {
 
+    public Context mContext = this;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bin);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.bin_toolbar);
-        toolbar.setTitle("Bin");
-        toolbar.setTitleTextAppearance(this, R.style.RalewayTextAppearance);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        String activityName = getString(R.string.bin);
+        SpannableString s = new SpannableString(activityName);
+        s.setSpan(new TypefaceSpan(mContext, "Raleway-Regular.ttf"), 0, s.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        // Update the action bar title with the TypefaceSpan instance
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar!=null)
+            actionBar.setTitle(s);
     }
 
     @Override
