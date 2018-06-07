@@ -22,4 +22,7 @@
     <string name="empty_list">Uh-oh. It\'s empty here! Add some notes.</string>
     <string name="select">Select an option</string>
     <string name="contact">Contact</string>
+    <string name="search_hint">Search notes</string>
+    <string name="already_here">You are already here!</string>
+    <string name="coming_soon">Export functionality coming soon!</string>
 </resources>

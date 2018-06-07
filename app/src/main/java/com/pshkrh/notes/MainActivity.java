@@ -1,10 +1,14 @@
 package com.pshkrh.notes;
 
+import android.app.SearchManager;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.SearchView;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.util.Log;
@@ -52,6 +56,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setCheckedItem(R.id.nav_notes);
 
         Menu menu = navigationView.getMenu();
 
@@ -96,6 +101,16 @@ public class MainActivity extends AppCompatActivity
                 applyFontToMenuItem(subMenuItem);
             }
         }
+
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
+
+
         return true;
     }
 
@@ -124,16 +139,28 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+        // set item as selected to persist highlight
+        //item.setChecked(true);
+
         int id = item.getItemId();
 
         if (id == R.id.nav_notes) {
-
+            Snackbar.make(findViewById(R.id.coordinator),R.string.already_here,Snackbar.LENGTH_LONG).show();
         } else if (id == R.id.nav_bin) {
 
         } else if (id == R.id.nav_export) {
-
+            Snackbar.make(findViewById(R.id.coordinator),R.string.coming_soon,Snackbar.LENGTH_LONG).show();
+            item.setChecked(false);
         } else if (id == R.id.nav_about) {
+
+        } else if(id == R.id.nav_contact) {
+            Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+            emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            emailIntent.setType("vnd.android.cursor.item/email");
+            emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {"dev@pshkrh.com"});
+            emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Feedback / Query regarding Notes");
+            emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "");
+            startActivity(Intent.createChooser(emailIntent, "Send mail using..."));
 
         } else if (id == R.id.nav_settings) {
 

@@ -8,28 +8,4 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <RelativeLayout
-        android:id="@+id/placeholder"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:visibility="visible">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:animateLayoutChanges="true"
-            android:contentDescription="@string/empty_list_image"
-            android:drawablePadding="10dp"
-            android:drawableTop="@drawable/ic_clipboard"
-            android:fontFamily="@font/raleway"
-            android:text="@string/empty_list"
-            android:textAlignment="center"
-            android:textColor="@color/colorPrimaryDark" />
-
-    </RelativeLayout>
-
 </android.support.constraint.ConstraintLayout>
