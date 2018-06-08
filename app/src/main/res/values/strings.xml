@@ -27,8 +27,17 @@
     <string name="coming_soon">Export functionality coming soon!</string>
     <string name="bin_empty">There\'s nothing in the Bin.</string>
     <string name="delete_all">Delete All</string>
+    <string name="delete">Delete</string>
     <string name="title">Title</string>
     <string name="description">Enter your note here</string>
     <string name="add_note">Add Note</string>
     <string name="star_content_description">Star Icon</string>
+    <string name="edit">Edit</string>
+    <string name="copy">Copy</string>
+    <string name="copy_title">Copy Title</string>
+    <string name="copy_description">Copy Description</string>
+    <string name="share">Share</string>
+    <string name="edit_note">Edit Note</string>
+    <string name="view_note">Note</string>
+    <string name="share_using">Share Using&#8230;</string>
 </resources>
