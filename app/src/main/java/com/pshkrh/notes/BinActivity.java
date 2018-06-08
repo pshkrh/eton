@@ -24,7 +24,7 @@ public class BinActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bin);
         String activityName = getString(R.string.bin);
         SpannableString s = new SpannableString(activityName);
-        s.setSpan(new TypefaceSpan(mContext, "Raleway-Regular.ttf"), 0, s.length(),
+        s.setSpan(new TypefaceSpan(mContext, "Raleway-Medium.ttf"), 0, s.length(),
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         // Update the action bar title with the TypefaceSpan instance
