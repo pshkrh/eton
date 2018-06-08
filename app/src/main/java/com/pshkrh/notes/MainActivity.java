@@ -3,6 +3,7 @@ package com.pshkrh.notes;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 import com.pshkrh.notes.Adapter.NoteAdapter;
+import com.pshkrh.notes.Helper.DatabaseHelper;
 import com.pshkrh.notes.Model.Note;
 
 import java.util.ArrayList;
@@ -41,6 +43,9 @@ public class MainActivity extends AppCompatActivity
     public ArrayList<Note> notes;
     public int imp=0;
 
+    public DatabaseHelper mDatabaseHelper;
+    public View parentView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,12 +54,16 @@ public class MainActivity extends AppCompatActivity
         toolbar.setTitleTextAppearance(this, R.style.RalewayTextAppearance);
         setSupportActionBar(toolbar);
 
+        mDatabaseHelper = new DatabaseHelper(this);
+        parentView = findViewById(R.id.coordinator);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, AddActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -88,7 +97,9 @@ public class MainActivity extends AppCompatActivity
 
         // RecyclerView Binding
         RecyclerView recyclerView = (RecyclerView)findViewById(R.id.main_recycler);
-        notes = Note.createNotesList(20);
+        notes = new ArrayList<Note>();
+
+        populateRecycler();
 
         NoteAdapter noteAdapter = new NoteAdapter(notes);
         recyclerView.setAdapter(noteAdapter);
@@ -102,7 +113,21 @@ public class MainActivity extends AppCompatActivity
         // Item Animator
         recyclerView.setItemAnimator(new SlideInUpAnimator());
 
+    }
 
+    private void populateRecycler() {
+        Log.d(TAG, "populateRecycler: Displaying data in the RecyclerView");
+
+        Cursor data = mDatabaseHelper.getData();
+        while(data.moveToNext()){
+            String title = data.getString(1);
+            String description = data.getString(2);
+            String date = data.getString(3);
+
+            Note insertNote = new Note(title,description,date);
+
+            notes.add(insertNote);
+        }
     }
 
     @Override

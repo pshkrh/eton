@@ -1,12 +1,14 @@
 package com.pshkrh.notes.Adapter;
 
 import android.content.Context;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.pshkrh.notes.Model.Note;
 import com.pshkrh.notes.R;
@@ -16,16 +18,29 @@ import java.util.List;
 public class NoteAdapter extends
         RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        Context mContext;
 
         public TextView titleTextView, descriptionTextView, dateTextView;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(Context context, View itemView) {
             super(itemView);
 
             titleTextView = (TextView) itemView.findViewById(R.id.note_title);
             descriptionTextView = (TextView) itemView.findViewById(R.id.note_description);
             dateTextView = (TextView) itemView.findViewById(R.id.note_date);
+
+            this.mContext = context;
+            itemView.setOnClickListener(this);
+        }
+
+        // Handles the row being being clicked
+        @Override
+        public void onClick(View view) {
+            int position = getAdapterPosition(); // gets item position
+            //TODO: Intent to View Activity
+            Snackbar.make(view,titleTextView.getText().toString(),Snackbar.LENGTH_SHORT).show();
         }
 
     }
@@ -45,7 +60,7 @@ public class NoteAdapter extends
         View contactView = inflater.inflate(R.layout.item_note, parent, false);
 
         // Return a new holder instance
-        ViewHolder viewHolder = new ViewHolder(contactView);
+        ViewHolder viewHolder = new ViewHolder(context,contactView);
         return viewHolder;
     }
 
