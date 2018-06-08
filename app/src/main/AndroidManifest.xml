@@ -40,7 +40,9 @@
             android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="adjustResize" />
 
-        <activity android:name=".EditActivity" />
+        <activity android:name=".EditActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:parentActivityName=".ViewNoteActivity"/>
 
         <activity android:name=".ViewNoteActivity"
             android:label="@string/view_note"
