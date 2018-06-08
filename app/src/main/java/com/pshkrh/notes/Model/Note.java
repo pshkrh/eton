@@ -35,4 +35,9 @@ public class Note {
     public void setDate(String date) {
         this.date = date;
     }
+
+    public static ArrayList<Note> createNotesList() {
+        ArrayList<Note> notes = new ArrayList<Note>();
+        return notes;
+    }
 }

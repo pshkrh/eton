@@ -8,6 +8,9 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -24,12 +27,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import com.pshkrh.notes.Adapter.NoteAdapter;
+import com.pshkrh.notes.Model.Note;
+
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static String TAG = "MainActivity";
-
-    int imp=0;
+    public ArrayList<Note> notes;
+    public int imp=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +82,22 @@ public class MainActivity extends AppCompatActivity
             //Custom method
             applyFontToMenuItem(mi);
         }
+
+
+        // RecyclerView Binding
+        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.main_recycler);
+        notes = Note.createNotesList();
+
+        NoteAdapter noteAdapter = new NoteAdapter(notes);
+        recyclerView.setAdapter(noteAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Item Decorator
+        RecyclerView.ItemDecoration itemDecoration = new
+                DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(itemDecoration);
+
+
     }
 
     @Override
