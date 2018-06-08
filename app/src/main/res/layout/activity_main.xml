@@ -38,10 +38,10 @@
             android:scrollbars="vertical" />
 
         <RelativeLayout
-            android:id="@+id/placeholder"
+            android:id="@+id/placeholder_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="match_parent"
