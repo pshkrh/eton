@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/view_edit"
+        android:orderInCategory="0"
+        android:title="@string/edit"
+        android:icon="@drawable/pencil"
+        app:showAsAction="always|collapseActionView" />
+    <item
+        android:id="@+id/view_delete"
+        android:orderInCategory="1"
+        android:title="@string/delete"
+        android:icon="@drawable/delete_white"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/view_copy"
+        android:orderInCategory="2"
+        android:title="@string/copy"
+        android:icon="@drawable/content_copy"
+        app:showAsAction="always">
+
+        <menu>
+
+            <item
+                android:id="@+id/view_copy_title"
+                android:orderInCategory="0"
+                android:title="@string/copy_title"
+                app:showAsAction="withText" />
+
+            <item
+                android:id="@+id/view_copy_description"
+                android:orderInCategory="0"
+                android:title="@string/copy_description"
+                app:showAsAction="withText" />
+
+        </menu>
+
+    </item>
+    <item
+        android:id="@+id/view_share"
+        android:orderInCategory="3"
+        android:title="@string/share"
+        android:icon="@drawable/share_variant"
+        app:showAsAction="always" />
+</menu>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/view_coordinator"
+    tools:context=".ViewNoteActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/view_note_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/raleway_semibold"
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimaryText"
+            android:maxLines="1"
+            android:maxLength="40"
+            android:animateLayoutChanges="true"
+            android:paddingBottom="10dp"/>
+
+        <TextView
+            android:id="@+id/view_note_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/raleway_semibold"
+            android:textSize="16sp"
+            android:textColor="@color/colorSecondaryText"
+            android:animateLayoutChanges="true"
+            android:paddingBottom="10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorDivider"
+            android:layout_marginBottom="5dp"/>
+
+        <TextView
+            android:id="@+id/view_note_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/colorDivider"
+            android:fontFamily="@font/raleway_semibold"
+            android:animateLayoutChanges="true" />
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

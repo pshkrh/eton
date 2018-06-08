@@ -1,6 +1,7 @@
 package com.pshkrh.notes.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,11 +13,16 @@ import android.widget.Toast;
 
 import com.pshkrh.notes.Model.Note;
 import com.pshkrh.notes.R;
+import com.pshkrh.notes.ViewNoteActivity;
 
 import java.util.List;
 
 public class NoteAdapter extends
         RecyclerView.Adapter<NoteAdapter.ViewHolder> {
+
+    public static String TITLE = "Title";
+    public static String DESC = "Description";
+    public static String DATE = "Date";
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -38,9 +44,13 @@ public class NoteAdapter extends
         // Handles the row being being clicked
         @Override
         public void onClick(View view) {
+            Context context = itemView.getContext();
             int position = getAdapterPosition(); // gets item position
-            //TODO: Intent to View Activity
-            Snackbar.make(view,titleTextView.getText().toString(),Snackbar.LENGTH_SHORT).show();
+            Intent intent = new Intent(context, ViewNoteActivity.class);
+            intent.putExtra(TITLE, titleTextView.getText().toString());
+            intent.putExtra(DESC, descriptionTextView.getText().toString());
+            intent.putExtra(DATE, dateTextView.getText().toString());
+            context.startActivity(intent);
         }
 
     }
