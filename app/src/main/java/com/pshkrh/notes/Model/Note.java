@@ -1,5 +1,8 @@
 package com.pshkrh.notes.Model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Note {
     public String title,description,date;
 
