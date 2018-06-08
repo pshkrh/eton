@@ -32,6 +32,8 @@ import com.pshkrh.notes.Model.Note;
 
 import java.util.ArrayList;
 
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -86,7 +88,7 @@ public class MainActivity extends AppCompatActivity
 
         // RecyclerView Binding
         RecyclerView recyclerView = (RecyclerView)findViewById(R.id.main_recycler);
-        notes = Note.createNotesList();
+        notes = Note.createNotesList(20);
 
         NoteAdapter noteAdapter = new NoteAdapter(notes);
         recyclerView.setAdapter(noteAdapter);
@@ -96,6 +98,9 @@ public class MainActivity extends AppCompatActivity
         RecyclerView.ItemDecoration itemDecoration = new
                 DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(itemDecoration);
+
+        // Item Animator
+        recyclerView.setItemAnimator(new SlideInUpAnimator());
 
 
     }
