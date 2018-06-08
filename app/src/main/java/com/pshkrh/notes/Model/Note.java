@@ -6,10 +6,9 @@ import java.util.List;
 public class Note {
     public String title,description,date;
 
-    public Note(String title, String description, String date) {
+    public Note(String title, String description) {
         this.title = title;
         this.description = description;
-        this.date = date;
     }
 
     public String getTitle() {
@@ -36,8 +35,12 @@ public class Note {
         this.date = date;
     }
 
-    public static ArrayList<Note> createNotesList() {
+    public static ArrayList<Note> createNotesList(int n) {
         ArrayList<Note> notes = new ArrayList<Note>();
+
+        for(int i=0; i<n;i++){
+            notes.add(new Note("Title " + i, "Description " + i));
+        }
         return notes;
     }
 }
