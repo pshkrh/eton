@@ -74,7 +74,7 @@ public class ViewNoteActivity extends AppCompatActivity {
                 break;
 
             case R.id.view_delete:
-                //TODO: Delete Logic Here
+                //TODO: Delete Logic Here.
 
             case R.id.view_copy_title:
                 ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
