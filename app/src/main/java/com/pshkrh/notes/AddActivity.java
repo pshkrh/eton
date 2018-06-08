@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.pshkrh.notes.Helper.DatabaseHelper;
+import com.pshkrh.notes.Helper.SnackbarHelper;
 import com.pshkrh.notes.Model.Note;
 
 public class AddActivity extends AppCompatActivity {
@@ -67,7 +68,7 @@ public class AddActivity extends AppCompatActivity {
                     finish();
                 }
                 else{
-                    snackLong(view, "Note is empty!");
+                    SnackbarHelper.snackLong(view, "Note is empty!");
                 }
             }
         });
@@ -102,17 +103,6 @@ public class AddActivity extends AppCompatActivity {
     }
 
     /*
-    Snackbar Methods
-     */
-    private void snackLong(View view, String message){
-        Snackbar.make(view,message,Snackbar.LENGTH_LONG);
-    }
-
-    private void snackShort(View view, String message){
-        Snackbar.make(view,message,Snackbar.LENGTH_SHORT);
-    }
-
-    /*
     Insert Data
      */
 
@@ -120,10 +110,10 @@ public class AddActivity extends AppCompatActivity {
         boolean isInsert = mDatabaseHelper.addData(note);
 
         if(isInsert){
-            snackLong(parentView,"Inserted data successfully!");
+            SnackbarHelper.snackLong(parentView,"Inserted data successfully!");
         }
         else{
-            snackShort(parentView,"Could not insert data.");
+            SnackbarHelper.snackShort(parentView,"Could not insert data.");
         }
     }
 }
