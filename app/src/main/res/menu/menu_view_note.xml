@@ -34,6 +34,12 @@
                 android:title="@string/copy_description"
                 app:showAsAction="withText" />
 
+            <item
+                android:id="@+id/view_copy_whole"
+                android:orderInCategory="0"
+                android:title="@string/copy_whole"
+                app:showAsAction="withText" />
+
         </menu>
 
     </item>

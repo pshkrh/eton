@@ -36,6 +36,7 @@
     <string name="copy">Copy</string>
     <string name="copy_title">Copy Title</string>
     <string name="copy_description">Copy Description</string>
+    <string name="copy_whole">Copy Entire Note</string>
     <string name="share">Share</string>
     <string name="edit_note">Edit Note</string>
     <string name="view_note">Note</string>

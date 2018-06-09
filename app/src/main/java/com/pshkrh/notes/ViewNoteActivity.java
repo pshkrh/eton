@@ -143,6 +143,15 @@ public class ViewNoteActivity extends AppCompatActivity {
                 SnackbarHelper.snackShort(findViewById(R.id.view_coordinator),"Description copied to clipboard!");
                 break;
 
+            case R.id.view_copy_whole:
+                String wholeNote = title + "\n\n" + description;
+                clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                clip = ClipData.newPlainText("Whole Note", wholeNote);
+                if(clipboard!=null)
+                    clipboard.setPrimaryClip(clip);
+                SnackbarHelper.snackShort(findViewById(R.id.view_coordinator),"Note copied to clipboard!");
+                break;
+
             case R.id.view_share:
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
