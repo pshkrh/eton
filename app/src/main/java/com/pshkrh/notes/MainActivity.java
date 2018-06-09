@@ -154,10 +154,7 @@ public class MainActivity extends AppCompatActivity
             Note insertNote = new Note(title,description,date,starred);
             notes.add(insertNote);
 
-            RecyclerView recyclerView = (RecyclerView)findViewById(R.id.main_recycler);
-            NoteAdapter noteAdapter = new NoteAdapter(notes);
-            recyclerView.setAdapter(noteAdapter);
-            noteAdapter.notifyDataSetChanged();
+            setRecycler();
         }
     }
 
@@ -174,12 +171,67 @@ public class MainActivity extends AppCompatActivity
             Note insertNote = new Note(title,description,date,starred);
             notes.add(insertNote);
 
-            RecyclerView recyclerView = (RecyclerView)findViewById(R.id.main_recycler);
-            NoteAdapter noteAdapter = new NoteAdapter(notes);
-            recyclerView.setAdapter(noteAdapter);
-            noteAdapter.notifyDataSetChanged();
+            setRecycler();
 
         }
+    }
+
+    public void displayAlphabeticallySorted() {
+        Log.d(TAG, "displayAlphabeticallySorted: Displaying alphabetically sorted items in the RecyclerView");
+        notes.clear();
+        Cursor data = mDatabaseHelper.getSortedData("alphabetical");
+        while (data.moveToNext()) {
+            String title = data.getString(1);
+            String description = data.getString(2);
+            String date = data.getString(3);
+            int starred = data.getInt(4);
+
+            Note insertNote = new Note(title, description, date, starred);
+            notes.add(insertNote);
+
+            setRecycler();
+        }
+    }
+
+    public void displayAscendingSorted() {
+        Log.d(TAG, "displayAscendingSorted: Displaying ascending sorted items in the RecyclerView");
+        notes.clear();
+        Cursor data = mDatabaseHelper.getSortedData("ascending");
+        while (data.moveToNext()) {
+            String title = data.getString(1);
+            String description = data.getString(2);
+            String date = data.getString(3);
+            int starred = data.getInt(4);
+
+            Note insertNote = new Note(title, description, date, starred);
+            notes.add(insertNote);
+
+            setRecycler();
+        }
+    }
+
+    public void displayDescendingSorted(){
+        Log.d(TAG, "displayDescendingSorted: Displaying descending sorted items in the RecyclerView");
+        notes.clear();
+        Cursor data = mDatabaseHelper.getSortedData("descending");
+        while (data.moveToNext()) {
+            String title = data.getString(1);
+            String description = data.getString(2);
+            String date = data.getString(3);
+            int starred = data.getInt(4);
+
+            Note insertNote = new Note(title, description, date, starred);
+            notes.add(insertNote);
+
+            setRecycler();
+        }
+    }
+
+    public void setRecycler(){
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.main_recycler);
+        NoteAdapter noteAdapter = new NoteAdapter(notes);
+        recyclerView.setAdapter(noteAdapter);
+        noteAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -238,6 +290,19 @@ public class MainActivity extends AppCompatActivity
                     item.setIcon(R.drawable.star_outline);
                     displayAll();
                 }
+                break;
+
+            case R.id.action_sort_alphabetical:
+                displayAlphabeticallySorted();
+                break;
+
+            case R.id.action_sort_ascending:
+                displayAscendingSorted();
+                break;
+
+            case R.id.action_sort_descending:
+                displayDescendingSorted();
+                break;
         }
 
         return super.onOptionsItemSelected(item);

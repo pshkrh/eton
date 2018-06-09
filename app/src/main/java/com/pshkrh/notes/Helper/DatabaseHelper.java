@@ -33,7 +33,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COL1 + " TEXT, " + COL2 + " TEXT, " + COL3 + " TEXT, " + COL4 + " INTEGER)";
+                COL1 + " TEXT, " + COL2 + " TEXT, " + COL3 + " TEXT, " + COL4 + " DATETIME)";
         sqLiteDatabase.execSQL(createTable);
     }
 
@@ -49,7 +49,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String noteTitle = note.getTitle();
         String noteDescription = note.getDescription();
-        String noteDate = currentTime.toString();
+        String noteDate = StringHelper.getDateTime();
         int starred = note.getStarred();
         contentValues.put(COL1,noteTitle);
         contentValues.put(COL2,noteDescription);
@@ -85,6 +85,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getItemID(String date){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT " + COL0 + " FROM " + TABLE_NAME + " WHERE " + COL3 + " = '" + date + "'";
+        Cursor data = db.rawQuery(query,null);
+        return data;
+    }
+
+    public Cursor getSortedData(String choice){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query="";
+        switch(choice){
+            case "alphabetical":
+                query = "SELECT * FROM " + TABLE_NAME + " ORDER BY " + COL1 + " ASC";
+                break;
+
+            case "ascending":
+                query = "SELECT * FROM " + TABLE_NAME + " ORDER BY " + COL3 + " ASC";
+                break;
+
+            case "descending":
+                query = "SELECT * FROM " + TABLE_NAME + " ORDER BY " + COL3 + " DESC";
+                break;
+        }
         Cursor data = db.rawQuery(query,null);
         return data;
     }

@@ -1,18 +1,20 @@
 package com.pshkrh.notes.Helper;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class StringHelper {
 
     public static String fixQuery(String query){
-        String fixedQuery="";
+        return query.replace("'","''");
+    }
 
-        /*for(int i=0;i<query.length();i++){
-            if(query.charAt(i) == '\''){
-                fixedQuery = query.substring(0,i) + "\'" + query.substring(i+1,query.length());
-            }
-        }*/
-
-        fixedQuery = query.replace("'","''");
-        return fixedQuery;
+    public static String getDateTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        Date date = new Date();
+        return dateFormat.format(date);
     }
 
 }
