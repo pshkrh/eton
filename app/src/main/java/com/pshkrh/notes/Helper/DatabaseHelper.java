@@ -192,7 +192,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String query = "DELETE FROM " + TABLE_NAME_TWO + " WHERE " + COL0 + " = '" + id + "'";
 
         Log.d(TAG, "deleteNote: Query = " + query);
-        Log.d(TAG, "deleteNote: Deleteting Note with ID = " + id);
+        Log.d(TAG, "deleteNote: Deleting Note with ID = " + id);
 
         db.execSQL(query);
     }
@@ -202,6 +202,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String query = "SELECT " + COL0 + " FROM " + TABLE_NAME_TWO + " WHERE " + COL3 + " = '" + date + "'";
         Cursor data = db.rawQuery(query,null);
         return data;
+    }
+
+    public void deleteAll(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "DELETE FROM " + TABLE_NAME_TWO;
+
+        Log.d(TAG, "deleteAll: Deleting All Notes from Bin");
+
+        db.execSQL(query);
     }
 
 
