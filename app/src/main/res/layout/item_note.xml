@@ -14,7 +14,6 @@
             android:id="@+id/note_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="hello"
             android:fontFamily="@font/raleway_medium"
             android:textSize="18sp"
             android:textColor="@color/colorPrimaryText"/>
@@ -23,17 +22,18 @@
             android:id="@+id/note_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="hello"
-            android:fontFamily="@font/raleway_semibold"
-            android:textSize="12sp"
+            android:fontFamily="@font/raleway"
+            android:textSize="16sp"
             android:textColor="@color/colorSecondaryText"
-            android:paddingTop="5dp"/>
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"/>
 
         <TextView
             android:id="@+id/note_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/raleway_medium" />
+            android:fontFamily="@font/raleway_medium"
+            android:textSize="12sp"/>
 
 
     </LinearLayout>
