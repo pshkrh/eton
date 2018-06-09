@@ -5,16 +5,34 @@ import java.util.List;
 
 public class Note {
     public String title,description,date;
+    public int starred;
 
     public Note(String title, String description) {
         this.title = title;
         this.description = description;
     }
 
-    public Note(String title, String description, String date) {
+    public void setStarred(int starred) {
+        this.starred = starred;
+    }
+
+    public int getStarred() {
+
+        return starred;
+    }
+
+    public Note(String title, String description, String date, int starred) {
         this.title = title;
         this.description = description;
         this.date = date;
+        this.starred = starred;
+
+    }
+
+    public Note(String title, String description, int starred) {
+        this.title = title;
+        this.description = description;
+        this.starred = starred;
     }
 
     public String getTitle() {

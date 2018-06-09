@@ -23,13 +23,16 @@ public class EditActivity extends AppCompatActivity {
     public static String TITLE = "Title";
     public static String DESC = "Description";
     public static String DATE = "Date";
+    public static String STAR = "Star";
 
-    public int imp=0, itemID;
+    public int starred, itemID;
     public Context mContext = this;
 
     public String intentTitle, intentDescription, intentDate;
 
     DatabaseHelper mDatabaseHelper;
+
+    //private Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,8 @@ public class EditActivity extends AppCompatActivity {
         intentDescription = getIntent().getStringExtra(DESC);
         intentDate = getIntent().getStringExtra(DATE);
 
+        starred = getIntent().getIntExtra(STAR,0);
+
         title.setText(intentTitle);
         description.setText(intentDescription);
 
@@ -78,7 +83,7 @@ public class EditActivity extends AppCompatActivity {
                 String editDescription = description.getText().toString();
 
                 if(!editTitle.equals("") && !editDescription.equals("")){
-                    mDatabaseHelper.updateNote(editTitle,editDescription,itemID);
+                    mDatabaseHelper.updateNote(editTitle,editDescription,itemID,starred);
                     Intent intent = new Intent(EditActivity.this, MainActivity.class);
 
                     // Clear the back stack of activities
@@ -97,7 +102,10 @@ public class EditActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_add, menu);
+        getMenuInflater().inflate(R.menu.menu_edit, menu);
+        if(starred==1){
+            menu.findItem(R.id.edit_star).setIcon(R.drawable.star);
+        }
         return true;
     }
 
@@ -108,14 +116,14 @@ public class EditActivity extends AppCompatActivity {
                 onBackPressed();
                 return true;
 
-            case R.id.add_star:
-                if(imp==0) {
-                    imp = 1;
+            case R.id.edit_star:
+                if(starred==0) {
+                    starred = 1;
                     item.setIcon(R.drawable.star);
                     break;
                 }
                 else {
-                    imp = 0;
+                    starred = 0;
                     item.setIcon(R.drawable.star_outline);
                     break;
                 }

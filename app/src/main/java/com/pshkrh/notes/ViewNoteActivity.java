@@ -24,10 +24,12 @@ public class ViewNoteActivity extends AppCompatActivity {
     public static String TITLE = "Title";
     public static String DESC = "Description";
     public static String DATE = "Date";
+    public static String STAR = "Star";
 
     public Context mContext = this;
 
     public String title,description,date;
+    public int starred;
 
     public DatabaseHelper mDatabaseHelper;
     public int itemID;
@@ -50,6 +52,7 @@ public class ViewNoteActivity extends AppCompatActivity {
         title = getIntent().getStringExtra(TITLE);
         description = getIntent().getStringExtra(DESC);
         date = getIntent().getStringExtra(DATE);
+        starred = getIntent().getIntExtra(STAR,0);
 
         TextView titleTextView = (TextView)findViewById(R.id.view_note_title);
         TextView descriptionTextView = (TextView)findViewById(R.id.view_note_description);
@@ -89,6 +92,7 @@ public class ViewNoteActivity extends AppCompatActivity {
                 intent.putExtra(TITLE,title);
                 intent.putExtra(DESC,description);
                 intent.putExtra(DATE, date);
+                intent.putExtra(STAR,starred);
                 startActivity(intent);
                 break;
 

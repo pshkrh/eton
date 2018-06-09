@@ -41,14 +41,33 @@
             android:background="@color/colorDivider"
             android:layout_marginBottom="5dp"/>
 
-        <TextView
-            android:id="@+id/view_note_date"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:textColor="@color/colorDivider"
-            android:fontFamily="@font/raleway_semibold"
-            android:animateLayoutChanges="true" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/view_note_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textSize="12sp"
+                android:textColor="@color/colorDivider"
+                android:fontFamily="@font/raleway_semibold"
+                android:animateLayoutChanges="true"
+                android:paddingEnd="5dp"
+                android:paddingStart="5dp"/>
+
+            <ImageView
+                android:id="@+id/starred_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/item_star"
+                android:contentDescription="@string/starred_note"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

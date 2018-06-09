@@ -44,4 +44,5 @@
     <string name="no">No</string>
     <string name="are_you_sure">Are you sure you want to delete this note?</string>
     <string name="delete_note">Delete Note</string>
+    <string name="starred_note">Starred Note Icon</string>
 </resources>

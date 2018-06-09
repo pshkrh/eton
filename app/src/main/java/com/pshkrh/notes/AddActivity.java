@@ -25,7 +25,7 @@ import com.pshkrh.notes.Model.Note;
 public class AddActivity extends AppCompatActivity {
 
     Context mContext = this;
-    int imp=0;
+    int starred=0;
 
     public DatabaseHelper mDatabaseHelper;
     public View parentView;
@@ -60,7 +60,7 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(title.length()!=0 && description.length()!=0){
-                    Note note = new Note(title.getText().toString(),description.getText().toString());
+                    Note note = new Note(title.getText().toString(),description.getText().toString(),starred);
                     insert(note);
                     title.setText("");
                     description.setText("");
@@ -90,13 +90,13 @@ public class AddActivity extends AppCompatActivity {
                 return true;
 
             case R.id.add_star:
-                if(imp==0) {
-                    imp = 1;
+                if(starred==0) {
+                    starred = 1;
                     item.setIcon(R.drawable.star);
                     break;
                 }
                 else {
-                    imp = 0;
+                    starred = 0;
                     item.setIcon(R.drawable.star_outline);
                     break;
                 }

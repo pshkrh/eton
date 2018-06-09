@@ -27,6 +27,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.pshkrh.notes.Adapter.NoteAdapter;
 import com.pshkrh.notes.Helper.DatabaseHelper;
@@ -40,8 +41,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static String TAG = "MainActivity";
-    public ArrayList<Note> notes;
-    public int imp=0;
+    public ArrayList<Note> notes = new ArrayList<Note>();;
+    public int starred=0;
 
     public DatabaseHelper mDatabaseHelper;
     public View parentView;
@@ -97,7 +98,6 @@ public class MainActivity extends AppCompatActivity
 
         // RecyclerView Binding
         RecyclerView recyclerView = (RecyclerView)findViewById(R.id.main_recycler);
-        notes = new ArrayList<Note>();
 
         populateRecycler();
 
@@ -113,6 +113,17 @@ public class MainActivity extends AppCompatActivity
         // Item Animator
         recyclerView.setItemAnimator(new SlideInUpAnimator());
 
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener(){
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy){
+                FloatingActionButton addFab = (FloatingActionButton)findViewById(R.id.fab);
+                if (dy > 0)
+                    addFab.hide();
+                else if (dy < 0)
+                    addFab.show();
+            }
+        });
+
     }
 
     private void populateRecycler() {
@@ -123,10 +134,51 @@ public class MainActivity extends AppCompatActivity
             String title = data.getString(1);
             String description = data.getString(2);
             String date = data.getString(3);
+            int starred = data.getInt(4);
 
-            Note insertNote = new Note(title,description,date);
-
+            Note insertNote = new Note(title,description,date,starred);
             notes.add(insertNote);
+        }
+    }
+
+    public void displayAll(){
+        Log.d(TAG, "populateRecycler: Displaying data in the RecyclerView");
+        notes.clear();
+        Cursor data = mDatabaseHelper.getData();
+        while(data.moveToNext()){
+            String title = data.getString(1);
+            String description = data.getString(2);
+            String date = data.getString(3);
+            int starred = data.getInt(4);
+
+            Note insertNote = new Note(title,description,date,starred);
+            notes.add(insertNote);
+
+            RecyclerView recyclerView = (RecyclerView)findViewById(R.id.main_recycler);
+            NoteAdapter noteAdapter = new NoteAdapter(notes);
+            recyclerView.setAdapter(noteAdapter);
+            noteAdapter.notifyDataSetChanged();
+        }
+    }
+
+    public void displayStarred(){
+        Log.d(TAG, "displayStarred: Displaying only starred items in the RecyclerView");
+        notes.clear();
+        Cursor data = mDatabaseHelper.getStarredData();
+        while(data.moveToNext()){
+            String title = data.getString(1);
+            String description = data.getString(2);
+            String date = data.getString(3);
+            int starred = data.getInt(4);
+
+            Note insertNote = new Note(title,description,date,starred);
+            notes.add(insertNote);
+
+            RecyclerView recyclerView = (RecyclerView)findViewById(R.id.main_recycler);
+            NoteAdapter noteAdapter = new NoteAdapter(notes);
+            recyclerView.setAdapter(noteAdapter);
+            noteAdapter.notifyDataSetChanged();
+
         }
     }
 
@@ -176,13 +228,15 @@ public class MainActivity extends AppCompatActivity
 
         switch(id){
             case R.id.action_star:
-                if(imp==0) {
-                    imp = 1;
+                if(starred==0) {
+                    starred = 1;
                     item.setIcon(R.drawable.star);
+                    displayStarred();
                 }
                 else {
-                    imp = 0;
+                    starred = 0;
                     item.setIcon(R.drawable.star_outline);
+                    displayAll();
                 }
         }
 

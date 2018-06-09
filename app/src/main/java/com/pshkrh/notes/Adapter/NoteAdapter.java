@@ -2,12 +2,14 @@ package com.pshkrh.notes.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,12 +25,14 @@ public class NoteAdapter extends
     public static String TITLE = "Title";
     public static String DESC = "Description";
     public static String DATE = "Date";
+    public static String STAR = "Star";
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         Context mContext;
 
         public TextView titleTextView, descriptionTextView, dateTextView;
+        public ImageView star;
 
         public ViewHolder(Context context, View itemView) {
             super(itemView);
@@ -36,6 +40,7 @@ public class NoteAdapter extends
             titleTextView = (TextView) itemView.findViewById(R.id.note_title);
             descriptionTextView = (TextView) itemView.findViewById(R.id.note_description);
             dateTextView = (TextView) itemView.findViewById(R.id.note_date);
+            star = (ImageView)itemView.findViewById(R.id.starred_note);
 
             this.mContext = context;
             itemView.setOnClickListener(this);
@@ -50,6 +55,13 @@ public class NoteAdapter extends
             intent.putExtra(TITLE, titleTextView.getText().toString());
             intent.putExtra(DESC, descriptionTextView.getText().toString());
             intent.putExtra(DATE, dateTextView.getText().toString());
+
+            if(star.getVisibility() == View.VISIBLE){
+                intent.putExtra(STAR,1);
+            }
+            else{
+                intent.putExtra(STAR,0);
+            }
             context.startActivity(intent);
         }
 
@@ -89,6 +101,12 @@ public class NoteAdapter extends
 
         TextView date = viewHolder.dateTextView;
         date.setText(note.getDate());
+
+        ImageView star = viewHolder.star;
+        int check = note.getStarred();
+        if(check == 1){
+            star.setVisibility(View.VISIBLE);
+        }
     }
 
     // Returns the total count of items in the list
