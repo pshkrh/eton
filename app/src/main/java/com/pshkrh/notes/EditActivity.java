@@ -1,6 +1,8 @@
 package com.pshkrh.notes;
 
 import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Typeface;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
@@ -13,16 +15,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.pshkrh.notes.Helper.DatabaseHelper;
+import com.pshkrh.notes.Helper.SnackbarHelper;
+
 public class EditActivity extends AppCompatActivity {
 
     public static String TITLE = "Title";
     public static String DESC = "Description";
     public static String DATE = "Date";
 
-    public int imp=0;
+    public int imp=0, itemID;
     public Context mContext = this;
 
-    public String intentTitle, intentDescription;
+    public String intentTitle, intentDescription, intentDate;
+
+    DatabaseHelper mDatabaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,15 +55,42 @@ public class EditActivity extends AppCompatActivity {
 
         intentTitle = getIntent().getStringExtra(TITLE);
         intentDescription = getIntent().getStringExtra(DESC);
+        intentDate = getIntent().getStringExtra(DATE);
 
         title.setText(intentTitle);
         description.setText(intentDescription);
+
+        mDatabaseHelper = new DatabaseHelper(this);
+        Cursor data = mDatabaseHelper.getItemID(intentDate);
+        itemID = -1;
+        while(data.moveToNext()){
+            itemID = data.getInt(0);
+        }
+        if(itemID <= -1){
+            SnackbarHelper.snackShort(findViewById(R.id.edit_coordinator), "No ID associated with that Note");
+        }
 
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.edit_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: Edit Logic Here.
+                String editTitle = title.getText().toString();
+                String editDescription = description.getText().toString();
+
+                if(!editTitle.equals("") && !editDescription.equals("")){
+                    mDatabaseHelper.updateNote(editTitle,editDescription,itemID);
+                    Intent intent = new Intent(EditActivity.this, MainActivity.class);
+
+                    // Clear the back stack of activities
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                    //Start the activity and finish the current one
+                    startActivity(intent);
+                    finish();
+                }
+                else{
+                    SnackbarHelper.snackShort(view,"Title or description cannot be empty!");
+                }
             }
         });
     }

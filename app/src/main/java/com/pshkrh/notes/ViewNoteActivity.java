@@ -4,6 +4,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +14,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.pshkrh.notes.Helper.DatabaseHelper;
 import com.pshkrh.notes.Helper.SnackbarHelper;
 
 public class ViewNoteActivity extends AppCompatActivity {
@@ -24,6 +28,10 @@ public class ViewNoteActivity extends AppCompatActivity {
     public Context mContext = this;
 
     public String title,description,date;
+
+    public DatabaseHelper mDatabaseHelper;
+    public int itemID;
+    public int deleteID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +58,16 @@ public class ViewNoteActivity extends AppCompatActivity {
         titleTextView.setText(title);
         descriptionTextView.setText(description);
         dateTextView.setText(date);
+
+        mDatabaseHelper = new DatabaseHelper(this);
+        Cursor data = mDatabaseHelper.getItemID(date);
+        itemID = -1;
+        while(data.moveToNext()){
+            itemID = data.getInt(0);
+        }
+        if(itemID <= -1){
+            SnackbarHelper.snackShort(findViewById(R.id.edit_coordinator), "No ID associated with that Note");
+        }
     }
 
     @Override
@@ -60,7 +78,7 @@ public class ViewNoteActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
@@ -70,11 +88,39 @@ public class ViewNoteActivity extends AppCompatActivity {
                 Intent intent = new Intent(ViewNoteActivity.this,EditActivity.class);
                 intent.putExtra(TITLE,title);
                 intent.putExtra(DESC,description);
+                intent.putExtra(DATE, date);
                 startActivity(intent);
                 break;
 
             case R.id.view_delete:
-                //TODO: Delete Logic Here.
+                new MaterialDialog.Builder(this)
+                        .title(R.string.delete_note)
+                        .content(R.string.are_you_sure)
+                        .positiveText(R.string.yes)
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(MaterialDialog dialog, DialogAction which) {
+                                mDatabaseHelper.deleteNote(itemID);
+                                Intent intent = new Intent(ViewNoteActivity.this, MainActivity.class);
+
+                                // Clear the back stack of activities
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                                //Start the activity and finish the current one
+                                startActivity(intent);
+                                finish();
+                            }
+                        })
+                        .negativeText(R.string.no)
+                        .onNegative(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(MaterialDialog dialog, DialogAction which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .icon(getResources().getDrawable(R.drawable.comment_question,getTheme()))
+                        .show();
+                        break;
 
             case R.id.view_copy_title:
                 ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
