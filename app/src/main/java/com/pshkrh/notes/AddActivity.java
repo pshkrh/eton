@@ -66,6 +66,7 @@ public class AddActivity extends AppCompatActivity {
                     description.setText("");
 
                     Intent intent = new Intent(AddActivity.this, MainActivity.class);
+                    intent.putExtra("addResult","Note Added!");
                     startActivity(intent);
                     finish();
                 }
@@ -116,7 +117,7 @@ public class AddActivity extends AppCompatActivity {
      */
 
     public void insert(Note note){
-        boolean isInsert = mDatabaseHelper.addData(note);
+        boolean isInsert = mDatabaseHelper.addData(note,0);
 
         if(isInsert){
             SnackbarHelper.snackLong(parentView,"Inserted data successfully!");

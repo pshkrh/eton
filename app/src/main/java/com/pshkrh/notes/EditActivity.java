@@ -85,7 +85,7 @@ public class EditActivity extends AppCompatActivity {
                 if(!editTitle.equals("") && !editDescription.equals("")){
                     mDatabaseHelper.updateNote(editTitle,editDescription,itemID,starred);
                     Intent intent = new Intent(EditActivity.this, MainActivity.class);
-
+                    intent.putExtra("editResult","Note Edited!");
                     // Clear the back stack of activities
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 
