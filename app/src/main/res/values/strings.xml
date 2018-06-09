@@ -50,4 +50,6 @@
     <string name="delete_forever">Delete Forever</string>
     <string name="restore">Restore</string>
     <string name="delete_or_restore">Would you like to Restore the Note or Delete it?</string>
+    <string name="delete_all_notes">Delete All Notes</string>
+    <string name="delete_all_sure">Are you sure you want to permanently delete all the Notes?</string>
 </resources>
