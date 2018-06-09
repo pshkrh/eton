@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/binView"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bin_coordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:attr/selectableItemBackground"
@@ -19,10 +19,10 @@
 
     <RelativeLayout
         android:background="@color/white"
-        android:id="@+id/binPlaceholder"
+        android:id="@+id/bin_placeholder"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <TextView
             android:layout_width="match_parent"
@@ -42,5 +42,15 @@
             android:textColor="@color/colorPrimary" />
 
     </RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/bin_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="normal"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/delete_empty"
+        android:visibility="visible"/>
 
 </android.support.design.widget.CoordinatorLayout>

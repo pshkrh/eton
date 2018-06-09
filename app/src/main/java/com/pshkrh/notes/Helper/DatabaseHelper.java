@@ -17,6 +17,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TAG = "DatabaseHelper";
 
     public static final String TABLE_NAME = "notes";
+    public static final String TABLE_NAME_TWO = "bin";
     public static final String COL0 = "ID";
     public static final String COL1 = "Title";
     public static final String COL2 = "Description";
@@ -32,9 +33,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+        String createTable1 = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COL1 + " TEXT, " + COL2 + " TEXT, " + COL3 + " TEXT, " + COL4 + " DATETIME)";
-        sqLiteDatabase.execSQL(createTable);
+
+        String createTable2 = "CREATE TABLE " + TABLE_NAME_TWO + " (ID INTEGER PRIMARY KEY, " +
+                COL1 + " TEXT, " + COL2 + " TEXT, " + COL3 + " TEXT, " + COL4 + " DATETIME)";
+
+        sqLiteDatabase.execSQL(createTable1);
+        sqLiteDatabase.execSQL(createTable2);
     }
 
     @Override
@@ -43,22 +49,62 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public boolean addData(Note note){
+    public boolean addData(Note note, int reAdd){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-
         String noteTitle = note.getTitle();
         String noteDescription = note.getDescription();
-        String noteDate = StringHelper.getDateTime();
+        String noteDate="";
+        if(reAdd == 0){
+            noteDate = StringHelper.getDateTime();
+            Log.d(TAG, "reAdd 0: Added timestamp from clock");
+        }
+        else if(reAdd == 1){
+            noteDate = note.getDate();
+            Log.d(TAG, "reAdd 1: Added timestamp from object");
+        }
         int starred = note.getStarred();
         contentValues.put(COL1,noteTitle);
         contentValues.put(COL2,noteDescription);
         contentValues.put(COL3,noteDate);
         contentValues.put(COL4,starred);
 
-        Log.d(TAG, "addData: Adding note with title " + noteTitle + "to " + TABLE_NAME);
+        Log.d(TAG, "addData: Adding note with title " + noteTitle + " to " + TABLE_NAME);
 
         long result = db.insert(TABLE_NAME, null,contentValues);
+
+        if(result == -1){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    public boolean addDeletedData(Note note){
+        int id=0;
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        String noteTitle = note.getTitle();
+        String noteDescription = note.getDescription();
+        String noteDate = note.getDate();
+        int starred = note.getStarred();
+
+        Cursor data = getItemID(note.getDate());
+        while(data.moveToNext()){
+            id = data.getInt(0);
+        }
+
+        contentValues.put(COL0,id);
+        contentValues.put(COL1,noteTitle);
+        contentValues.put(COL2,noteDescription);
+        contentValues.put(COL3,noteDate);
+        contentValues.put(COL4,starred);
+
+        Log.d(TAG, "addDeletedData: Adding deleted note with title " + noteTitle + "to " + TABLE_NAME_TWO);
+
+        long result = db.insert(TABLE_NAME_TWO, null,contentValues);
 
         if(result == -1){
             return false;
@@ -78,6 +124,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getStarredData(){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL4 + " = '" + "1'" + " ORDER BY " + COL3 + " DESC";
+        Cursor data = db.rawQuery(query,null);
+        return data;
+    }
+
+    public Cursor getDeletedData(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME_TWO + " ORDER BY " + COL3 + " DESC";
         Cursor data = db.rawQuery(query,null);
         return data;
     }
@@ -132,6 +185,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d(TAG, "deleteNote: Deleteting Note with ID = " + id);
 
         db.execSQL(query);
+    }
+
+    public void deleteBinNote(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "DELETE FROM " + TABLE_NAME_TWO + " WHERE " + COL0 + " = '" + id + "'";
+
+        Log.d(TAG, "deleteNote: Query = " + query);
+        Log.d(TAG, "deleteNote: Deleteting Note with ID = " + id);
+
+        db.execSQL(query);
+    }
+
+    public Cursor getDeletedItemID(String date){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT " + COL0 + " FROM " + TABLE_NAME_TWO + " WHERE " + COL3 + " = '" + date + "'";
+        Cursor data = db.rawQuery(query,null);
+        return data;
     }
 
 

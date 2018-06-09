@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
@@ -22,9 +23,11 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.pshkrh.notes.Helper.DatabaseHelper;
 import com.pshkrh.notes.Helper.SnackbarHelper;
+import com.pshkrh.notes.Model.Note;
 
 public class ViewNoteActivity extends AppCompatActivity {
 
+    public static String TAG = "ViewNoteActivity";
     public static String TITLE = "Title";
     public static String DESC = "Description";
     public static String DATE = "Date";
@@ -125,8 +128,14 @@ public class ViewNoteActivity extends AppCompatActivity {
                         .onPositive(new MaterialDialog.SingleButtonCallback() {
                             @Override
                             public void onClick(MaterialDialog dialog, DialogAction which) {
+                                Note note = new Note(title,description,date,starred);
+                                boolean res = mDatabaseHelper.addDeletedData(note);
+                                if(!res){
+                                    Log.d(TAG,"Adding to bin table failed");
+                                }
                                 mDatabaseHelper.deleteNote(itemID);
                                 Intent intent = new Intent(ViewNoteActivity.this, MainActivity.class);
+                                intent.putExtra("deleteResult","Note has been moved to Bin");
 
                                 // Clear the back stack of activities
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

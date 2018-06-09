@@ -32,6 +32,7 @@ import android.widget.RelativeLayout;
 
 import com.pshkrh.notes.Adapter.NoteAdapter;
 import com.pshkrh.notes.Helper.DatabaseHelper;
+import com.pshkrh.notes.Helper.SnackbarHelper;
 import com.pshkrh.notes.Model.Note;
 
 import java.util.ArrayList;
@@ -48,6 +49,11 @@ public class MainActivity extends AppCompatActivity
     public DatabaseHelper mDatabaseHelper;
     public View parentView;
 
+    public String binResult="";
+    public String deleteResult="";
+    public String addResult="";
+    public String editResult="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +64,27 @@ public class MainActivity extends AppCompatActivity
 
         mDatabaseHelper = new DatabaseHelper(this);
         parentView = findViewById(R.id.coordinator);
+
+        binResult = getIntent().getStringExtra("result");
+        deleteResult = getIntent().getStringExtra("deleteResult");
+        addResult = getIntent().getStringExtra("addResult");
+        editResult = getIntent().getStringExtra("editResult");
+
+        if(binResult!=null && !binResult.equals("")){
+            SnackbarHelper.snackLong(parentView,binResult);
+        }
+
+        if(deleteResult!=null && !deleteResult.equals("")){
+            SnackbarHelper.snackLong(parentView,deleteResult);
+        }
+
+        if(addResult!=null && !addResult.equals("")){
+            SnackbarHelper.snackLong(parentView,addResult);
+        }
+
+        if(editResult!=null && !editResult.equals("")){
+            SnackbarHelper.snackLong(parentView,editResult);
+        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

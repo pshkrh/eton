@@ -46,4 +46,8 @@
     <string name="are_you_sure">Are you sure you want to delete this note?</string>
     <string name="delete_note">Delete Note</string>
     <string name="starred_note">Starred Note Icon</string>
+    <string name="del_res">Restore or Delete Note</string>
+    <string name="delete_forever">Delete Forever</string>
+    <string name="restore">Restore</string>
+    <string name="delete_or_restore">Would you like to Restore the Note or Delete it?</string>
 </resources>
