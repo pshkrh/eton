@@ -80,8 +80,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void updateNote(String title, String description, int id){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "UPDATE " + TABLE_NAME + " SET " + COL1 + " = '" + title + "', " + COL2 + " = '" +
-                description + "' WHERE " + COL0 + " = '" + id + "'";
+        String newTitle = StringHelper.fixQuery(title);
+        String newDescription = StringHelper.fixQuery(description);
+
+        String query = "UPDATE " + TABLE_NAME + " SET " + COL1 + " = '" + newTitle + "', " + COL2 + " = '" + newDescription + "' WHERE " + COL0 + " = '" + id + "'";
 
         Log.d(TAG, "updateNote: Query = " + query);
         Log.d(TAG, "updateNote: Setting title to " + title);
