@@ -70,14 +70,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getData(){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_NAME;
+        String query = "SELECT * FROM " + TABLE_NAME + " ORDER BY " + COL3 + " DESC";
         Cursor data = db.rawQuery(query,null);
         return data;
     }
 
     public Cursor getStarredData(){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL4 + " = '" + "1'";
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL4 + " = '" + "1'" + " ORDER BY " + COL3 + " DESC";
         Cursor data = db.rawQuery(query,null);
         return data;
     }
