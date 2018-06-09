@@ -15,6 +15,8 @@ import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.pshkrh.notes.Adapter.DeletedNoteAdapter;
 import com.pshkrh.notes.Adapter.NoteAdapter;
 import com.pshkrh.notes.Helper.DatabaseHelper;
@@ -74,7 +76,7 @@ public class BinActivity extends AppCompatActivity {
 
         populateBinRecycler();
 
-        DeletedNoteAdapter deletedNoteAdapter = new DeletedNoteAdapter(deletedNotes);
+        final DeletedNoteAdapter deletedNoteAdapter = new DeletedNoteAdapter(deletedNotes);
         recyclerView.setAdapter(deletedNoteAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -104,6 +106,39 @@ public class BinActivity extends AppCompatActivity {
             binFab.setVisibility(View.GONE);
 
         }
+
+        final FloatingActionButton binFab = (FloatingActionButton)findViewById(R.id.bin_fab);
+        binFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new MaterialDialog.Builder(BinActivity.this)
+                        .title(R.string.delete_all_notes)
+                        .content(R.string.delete_all_sure)
+                        .positiveText(R.string.yes)
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(MaterialDialog dialog, DialogAction which) {
+                                mDatabaseHelper.deleteAll();
+                                SnackbarHelper.snackShort(parentView,"Deleted All Notes!");
+                                deletedNotes.clear();
+                                deletedNoteAdapter.notifyDataSetChanged();
+                                RelativeLayout placeholder = (RelativeLayout)findViewById(R.id.bin_placeholder);
+                                placeholder.setVisibility(View.VISIBLE);
+                                binFab.setVisibility(View.GONE);
+                            }
+                        })
+                        .negativeText(R.string.no)
+                        .onNegative(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(MaterialDialog dialog, DialogAction which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .icon(getResources().getDrawable(R.drawable.comment_question,getTheme()))
+                        .typeface("Raleway-Medium.ttf","Raleway-Regular.ttf")
+                        .show();
+            }
+        });
 
     }
 
