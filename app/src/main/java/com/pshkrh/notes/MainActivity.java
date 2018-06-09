@@ -65,26 +65,7 @@ public class MainActivity extends AppCompatActivity
         mDatabaseHelper = new DatabaseHelper(this);
         parentView = findViewById(R.id.coordinator);
 
-        binResult = getIntent().getStringExtra("result");
-        deleteResult = getIntent().getStringExtra("deleteResult");
-        addResult = getIntent().getStringExtra("addResult");
-        editResult = getIntent().getStringExtra("editResult");
-
-        if(binResult!=null && !binResult.equals("")){
-            SnackbarHelper.snackLong(parentView,binResult);
-        }
-
-        if(deleteResult!=null && !deleteResult.equals("")){
-            SnackbarHelper.snackLong(parentView,deleteResult);
-        }
-
-        if(addResult!=null && !addResult.equals("")){
-            SnackbarHelper.snackLong(parentView,addResult);
-        }
-
-        if(editResult!=null && !editResult.equals("")){
-            SnackbarHelper.snackLong(parentView,editResult);
-        }
+        intentResultCheck();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -157,6 +138,29 @@ public class MainActivity extends AppCompatActivity
             emptyList.setVisibility(View.VISIBLE);
         }
 
+    }
+
+    private void intentResultCheck(){
+        binResult = getIntent().getStringExtra("result");
+        deleteResult = getIntent().getStringExtra("deleteResult");
+        addResult = getIntent().getStringExtra("addResult");
+        editResult = getIntent().getStringExtra("editResult");
+
+        if(binResult!=null && !binResult.equals("")){
+            SnackbarHelper.snackLong(parentView,binResult);
+        }
+
+        if(deleteResult!=null && !deleteResult.equals("")){
+            SnackbarHelper.snackLong(parentView,deleteResult);
+        }
+
+        if(addResult!=null && !addResult.equals("")){
+            SnackbarHelper.snackLong(parentView,addResult);
+        }
+
+        if(editResult!=null && !editResult.equals("")){
+            SnackbarHelper.snackLong(parentView,editResult);
+        }
     }
 
     private void populateRecycler() {
