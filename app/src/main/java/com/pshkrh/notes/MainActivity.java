@@ -28,6 +28,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.pshkrh.notes.Adapter.NoteAdapter;
 import com.pshkrh.notes.Helper.DatabaseHelper;
@@ -123,6 +124,11 @@ public class MainActivity extends AppCompatActivity
                     addFab.show();
             }
         });
+
+        if(noteAdapter.getItemCount()==0){
+            RelativeLayout emptyList = (RelativeLayout)findViewById(R.id.placeholder_view);
+            emptyList.setVisibility(View.VISIBLE);
+        }
 
     }
 
