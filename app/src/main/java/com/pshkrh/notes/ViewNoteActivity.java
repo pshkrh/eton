@@ -119,6 +119,7 @@ public class ViewNoteActivity extends AppCompatActivity {
                             }
                         })
                         .icon(getResources().getDrawable(R.drawable.comment_question,getTheme()))
+                        .typeface("Raleway-Medium.ttf","Raleway-Regular.ttf")
                         .show();
                         break;
 
