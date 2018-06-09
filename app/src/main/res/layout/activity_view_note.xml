@@ -62,7 +62,7 @@
                 android:id="@+id/starred_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="visible"
+                android:visibility="invisible"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/item_star"
                 android:contentDescription="@string/starred_note"/>

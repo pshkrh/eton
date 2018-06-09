@@ -12,6 +12,8 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -53,6 +55,11 @@ public class ViewNoteActivity extends AppCompatActivity {
         description = getIntent().getStringExtra(DESC);
         date = getIntent().getStringExtra(DATE);
         starred = getIntent().getIntExtra(STAR,0);
+        
+        if(starred==1){
+            ImageView starImage = (ImageView)findViewById(R.id.starred_image);
+            starImage.setVisibility(View.VISIBLE);
+        }
 
         TextView titleTextView = (TextView)findViewById(R.id.view_note_title);
         TextView descriptionTextView = (TextView)findViewById(R.id.view_note_description);
