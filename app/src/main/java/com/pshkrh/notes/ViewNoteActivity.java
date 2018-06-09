@@ -5,6 +5,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,6 +39,8 @@ public class ViewNoteActivity extends AppCompatActivity {
     public int itemID;
     public int deleteID;
 
+    Menu menu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +59,7 @@ public class ViewNoteActivity extends AppCompatActivity {
         description = getIntent().getStringExtra(DESC);
         date = getIntent().getStringExtra(DATE);
         starred = getIntent().getIntExtra(STAR,0);
-        
+
         if(starred==1){
             ImageView starImage = (ImageView)findViewById(R.id.starred_image);
             starImage.setVisibility(View.VISIBLE);
@@ -84,6 +88,16 @@ public class ViewNoteActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_view_note, menu);
+
+        //Apply Raleway font to Sort menu
+        MenuItem menuItem = menu.getItem(2);
+        SubMenu subMenu = menuItem.getSubMenu();
+        if (subMenu!=null && subMenu.size() >0 ) {
+            for (int j=0; j <subMenu.size();j++) {
+                MenuItem subMenuItem = subMenu.getItem(j);
+                applyFontToMenuItem(subMenuItem);
+            }
+        }
         return true;
     }
 
@@ -167,5 +181,12 @@ public class ViewNoteActivity extends AppCompatActivity {
                 startActivity(Intent.createChooser(sharingIntent, getResources().getString(R.string.share_using)));
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void applyFontToMenuItem(MenuItem mi) {
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Raleway-Medium.ttf");
+        SpannableString mNewTitle = new SpannableString(mi.getTitle());
+        mNewTitle.setSpan(new CustomTypefaceSpan("" , font), 0 , mNewTitle.length(),  Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        mi.setTitle(mNewTitle);
     }
 }
