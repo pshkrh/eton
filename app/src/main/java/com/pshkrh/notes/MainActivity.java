@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DividerItemDecoration;
@@ -29,6 +30,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.pshkrh.notes.Adapter.NoteAdapter;
 import com.pshkrh.notes.Helper.DatabaseHelper;
@@ -110,7 +112,7 @@ public class MainActivity extends AppCompatActivity
 
         populateRecycler();
 
-        NoteAdapter noteAdapter = new NoteAdapter(notes);
+        NoteAdapter noteAdapter;noteAdapter = new NoteAdapter(notes);
         recyclerView.setAdapter(noteAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -137,7 +139,6 @@ public class MainActivity extends AppCompatActivity
             RelativeLayout emptyList = (RelativeLayout)findViewById(R.id.placeholder_view);
             emptyList.setVisibility(View.VISIBLE);
         }
-
     }
 
     private void intentResultCheck(){
@@ -179,7 +180,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void displayAll(){
-        Log.d(TAG, "populateRecycler: Displaying data in the RecyclerView");
+        Log.d(TAG, "displayAll: Displaying all notes in the RecyclerView");
         notes.clear();
         Cursor data = mDatabaseHelper.getData();
         while(data.moveToNext()){
@@ -295,16 +296,6 @@ public class MainActivity extends AppCompatActivity
                 applyFontToMenuItem(subMenuItem);
             }
         }
-
-        // Associate searchable configuration with the SearchView
-        SearchManager searchManager =
-                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView =
-                (SearchView) menu.findItem(R.id.action_search).getActionView();
-        searchView.setSearchableInfo(
-                searchManager.getSearchableInfo(getComponentName()));
-
-
         return true;
     }
 
@@ -358,6 +349,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_bin) {
             Intent intent = new Intent(MainActivity.this, BinActivity.class);
             startActivity(intent);
+            finish();
         } else if (id == R.id.nav_export) {
             Snackbar.make(findViewById(R.id.coordinator),R.string.coming_soon,Snackbar.LENGTH_LONG).show();
         } else if (id == R.id.nav_about) {
@@ -386,4 +378,5 @@ public class MainActivity extends AppCompatActivity
         mNewTitle.setSpan(new CustomTypefaceSpan("" , font), 0 , mNewTitle.length(),  Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         mi.setTitle(mNewTitle);
     }
+
 }
