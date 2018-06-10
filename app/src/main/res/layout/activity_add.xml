@@ -9,48 +9,6 @@
     android:fitsSystemWindows="true"
     tools:context="com.pshkrh.notes.AddActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="8dp"
-        android:gravity="top"
-        android:orientation="vertical">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/add_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:gravity="top"
-            android:maxLines="1"
-            android:inputType="textEmailAddress"
-            android:maxLength="40"
-            android:backgroundTint="@color/white"
-            android:hint="@string/title"
-            android:textColor="@color/colorPrimaryText"
-            android:textColorHint="@color/colorSecondaryText"
-            tools:fontPath="fonts/Raleway-Regular.ttf" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorDivider" />
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/description"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="top"
-            android:gravity="top"
-            android:textSize="16sp"
-            android:backgroundTint="@color/white"
-            android:hint="@string/description"
-            android:textColor="@color/colorSecondaryText"
-            android:textColorHint="@color/colorSecondaryText"
-            tools:fontPath="fonts/Raleway-Regular.ttf" />
-
-    </LinearLayout>
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_fab"
         android:layout_width="wrap_content"
@@ -60,5 +18,49 @@
         app:backgroundTint="@color/colorAccent"
         app:fabSize="normal"
         app:srcCompat="@drawable/check" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:gravity="top"
+        android:orientation="vertical">
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/add_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:gravity="top"
+            android:hint="@string/title"
+            android:textSize="16sp"
+            app:met_floatingLabel="highlight"
+            app:met_textColor="@color/colorPrimaryText"
+            app:met_textColorHint="@color/colorSecondaryText"
+            app:met_hideUnderline="true"
+            tools:fontPath="fonts/Raleway-Regular.ttf" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorDivider"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"/>
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:gravity="top"
+            android:hint="@string/description"
+            android:textSize="16sp"
+            app:met_floatingLabel="highlight"
+            app:met_textColor="@color/colorPrimaryText"
+            app:met_textColorHint="@color/colorSecondaryText"
+            app:met_hideUnderline="true"
+            tools:fontPath="fonts/Raleway-Regular.ttf" />
+
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

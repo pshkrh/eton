@@ -21,6 +21,7 @@ import android.view.View;
 import com.pshkrh.notes.Helper.DatabaseHelper;
 import com.pshkrh.notes.Helper.SnackbarHelper;
 import com.pshkrh.notes.Model.Note;
+import com.rengwuxian.materialedittext.MaterialEditText;
 
 public class AddActivity extends AppCompatActivity {
 
@@ -36,7 +37,7 @@ public class AddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add);
         String activityName = getString(R.string.add_note);
         SpannableString s = new SpannableString(activityName);
-        s.setSpan(new TypefaceSpan(mContext, "Raleway-Regular.ttf"), 0, s.length(),
+        s.setSpan(new TypefaceSpan(mContext, "Raleway-Medium.ttf"), 0, s.length(),
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         parentView = findViewById(R.id.add_coordinator);
@@ -47,8 +48,8 @@ public class AddActivity extends AppCompatActivity {
         if(actionBar!=null)
             actionBar.setTitle(s);
 
-        final TextInputEditText title = findViewById(R.id.add_title);
-        final TextInputEditText description = findViewById(R.id.description);
+        final MaterialEditText title = findViewById(R.id.add_title);
+        final MaterialEditText description = findViewById(R.id.description);
 
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Raleway-Medium.ttf");
 

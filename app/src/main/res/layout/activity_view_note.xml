@@ -54,9 +54,7 @@
                 android:textSize="12sp"
                 android:textColor="@color/colorDivider"
                 android:fontFamily="@font/raleway_semibold"
-                android:animateLayoutChanges="true"
-                android:paddingEnd="5dp"
-                android:paddingStart="5dp"/>
+                android:animateLayoutChanges="true" />
 
             <ImageView
                 android:id="@+id/starred_image"
@@ -65,7 +63,9 @@
                 android:visibility="invisible"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/item_star"
-                android:contentDescription="@string/starred_note"/>
+                android:contentDescription="@string/starred_note"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"/>
 
         </LinearLayout>
 

@@ -17,6 +17,7 @@ import android.view.View;
 
 import com.pshkrh.notes.Helper.DatabaseHelper;
 import com.pshkrh.notes.Helper.SnackbarHelper;
+import com.rengwuxian.materialedittext.MaterialEditText;
 
 public class EditActivity extends AppCompatActivity {
 
@@ -40,7 +41,7 @@ public class EditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit);
         String activityName = getString(R.string.edit_note);
         SpannableString s = new SpannableString(activityName);
-        s.setSpan(new TypefaceSpan(mContext, "Raleway-Regular.ttf"), 0, s.length(),
+        s.setSpan(new TypefaceSpan(mContext, "Raleway-Medium.ttf"), 0, s.length(),
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         // Update the action bar title with the TypefaceSpan instance
@@ -48,8 +49,8 @@ public class EditActivity extends AppCompatActivity {
         if(actionBar!=null)
             actionBar.setTitle(s);
 
-        final TextInputEditText title = findViewById(R.id.edit_title);
-        final TextInputEditText description = findViewById(R.id.edit_description);
+        final MaterialEditText title = findViewById(R.id.edit_title);
+        final MaterialEditText description = findViewById(R.id.edit_description);
 
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Raleway-Medium.ttf");
 

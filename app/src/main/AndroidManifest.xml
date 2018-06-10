@@ -41,7 +41,7 @@
             android:windowSoftInputMode="adjustResize" />
 
         <activity android:name=".EditActivity"
-            android:windowSoftInputMode="adjustResize"
+            android:windowSoftInputMode="adjustPan"
             android:parentActivityName=".ViewNoteActivity"/>
 
         <activity android:name=".ViewNoteActivity"
