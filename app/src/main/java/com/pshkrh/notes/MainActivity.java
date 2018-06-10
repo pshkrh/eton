@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static String TAG = "MainActivity";
-    public ArrayList<Note> notes = new ArrayList<Note>();;
+    public ArrayList<Note> notes = new ArrayList<Note>();
     public int starred=0;
 
     public DatabaseHelper mDatabaseHelper;
