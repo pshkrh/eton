@@ -213,4 +213,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(query);
     }
 
+    public Cursor getSearchedData(String keyword){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL1 + " LIKE '%"
+        + keyword + "%' OR " + COL2 + " LIKE '%" + keyword + "%'" + " ORDER BY " + COL3 + " DESC";
+        Log.d(TAG, "Searched Data Query = " + query);
+        Cursor data = db.rawQuery(query,null);
+        return data;
+    }
+
 }

@@ -39,14 +39,26 @@
             android:label="@string/add_note"
             android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="adjustResize" />
-
-        <activity android:name=".EditActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:parentActivityName=".ViewNoteActivity"/>
-
-        <activity android:name=".ViewNoteActivity"
+        <activity
+            android:name=".EditActivity"
+            android:parentActivityName=".ViewNoteActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ViewNoteActivity"
             android:label="@string/view_note"
             android:parentActivityName=".MainActivity">
+        </activity>
+        <activity
+            android:name=".SearchResultsActivity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+            <meta-data android:name="android.app.searchable"
+            android:resource="@xml/searchable" />
+             <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
         </activity>
     </application>
 

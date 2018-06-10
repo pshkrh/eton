@@ -1,6 +1,7 @@
 package com.pshkrh.notes;
 
 import android.app.SearchManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -296,6 +297,15 @@ public class MainActivity extends AppCompatActivity
                 applyFontToMenuItem(subMenuItem);
             }
         }
+
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(new ComponentName(this, SearchResultsActivity.class)));
+        searchView.setQueryHint(getResources().getString(R.string.search_hint));
+
         return true;
     }
 
