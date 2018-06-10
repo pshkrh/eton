@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -31,6 +32,10 @@ public class SearchResultsActivity extends AppCompatActivity {
     public SearchAdapter searchAdapter;
 
     public static String TAG = "SearchResultsActivity";
+    public static String TITLE = "Title";
+    public static String DESC = "Description";
+    public static String DATE = "Date";
+    public static String STAR = "Star";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +60,20 @@ public class SearchResultsActivity extends AppCompatActivity {
         listView.setAdapter(searchAdapter);
 
         handleIntent(getIntent());
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Note note = (Note)adapterView.getItemAtPosition(i);
+                Intent intent = new Intent(SearchResultsActivity.this,ViewNoteActivity.class);
+                intent.putExtra(TITLE,note.getTitle());
+                intent.putExtra(DESC,note.getDescription());
+                intent.putExtra(DATE,note.getDate());
+                intent.putExtra(STAR,note.getStarred());
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     @Override
