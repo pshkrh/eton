@@ -201,17 +201,22 @@ public class MainActivity extends AppCompatActivity
         Log.d(TAG, "displayStarred: Displaying only starred items in the RecyclerView");
         notes.clear();
         Cursor data = mDatabaseHelper.getStarredData();
-        while(data.moveToNext()){
-            String title = data.getString(1);
-            String description = data.getString(2);
-            String date = data.getString(3);
-            int starred = data.getInt(4);
+        if(data.getCount()==0){
+            SnackbarHelper.snackShort(parentView,"No starred items!");
+        }
+        else {
+            while (data.moveToNext()) {
+                String title = data.getString(1);
+                String description = data.getString(2);
+                String date = data.getString(3);
+                int starred = data.getInt(4);
 
-            Note insertNote = new Note(title,description,date,starred);
-            notes.add(insertNote);
+                Note insertNote = new Note(title, description, date, starred);
+                notes.add(insertNote);
 
-            setRecycler();
+                setRecycler();
 
+            }
         }
     }
 
@@ -321,11 +326,13 @@ public class MainActivity extends AppCompatActivity
                 if(starred==0) {
                     starred = 1;
                     item.setIcon(R.drawable.star);
+                    notes.clear();
                     displayStarred();
                 }
                 else {
                     starred = 0;
                     item.setIcon(R.drawable.star_outline);
+                    notes.clear();
                     displayAll();
                 }
                 break;
@@ -374,7 +381,8 @@ public class MainActivity extends AppCompatActivity
             startActivity(Intent.createChooser(emailIntent, "Send mail using..."));
 
         } else if (id == R.id.nav_settings) {
-
+            Intent intent = new Intent(MainActivity.this,SettingsActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

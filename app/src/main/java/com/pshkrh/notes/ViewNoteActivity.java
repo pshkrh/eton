@@ -40,7 +40,6 @@ public class ViewNoteActivity extends AppCompatActivity {
 
     public DatabaseHelper mDatabaseHelper;
     public int itemID;
-    public int deleteID;
 
     Menu menu;
 
@@ -198,4 +197,5 @@ public class ViewNoteActivity extends AppCompatActivity {
         mNewTitle.setSpan(new CustomTypefaceSpan("" , font), 0 , mNewTitle.length(),  Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         mi.setTitle(mNewTitle);
     }
+
 }

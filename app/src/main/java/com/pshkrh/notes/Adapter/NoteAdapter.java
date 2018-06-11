@@ -67,6 +67,7 @@ public class NoteAdapter extends
             else{
                 intent.putExtra(STAR,0);
             }
+
             context.startActivity(intent);
         }
 
