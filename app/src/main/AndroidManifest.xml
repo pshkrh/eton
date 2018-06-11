@@ -46,7 +46,7 @@
         <activity
             android:name=".ViewNoteActivity"
             android:label="@string/view_note"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".SearchResultsActivity"
             android:parentActivityName=".MainActivity">
@@ -61,13 +61,9 @@
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"
+        <activity android:name=".AboutActivity"
+            android:label="@string/about"
             android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.pshkrh.notes.MainActivity" />
         </activity>
     </application>
 

@@ -370,7 +370,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_export) {
             Snackbar.make(findViewById(R.id.coordinator),R.string.coming_soon,Snackbar.LENGTH_LONG).show();
         } else if (id == R.id.nav_about) {
-
+            Intent intent = new Intent(MainActivity.this,AboutActivity.class);
+            startActivity(intent);
         } else if(id == R.id.nav_contact) {
             Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
             emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -381,8 +382,6 @@ public class MainActivity extends AppCompatActivity
             startActivity(Intent.createChooser(emailIntent, "Send mail using..."));
 
         } else if (id == R.id.nav_settings) {
-            Intent intent = new Intent(MainActivity.this,SettingsActivity.class);
-            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
