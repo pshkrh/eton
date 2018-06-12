@@ -25,6 +25,11 @@ import com.pshkrh.notes.Helper.DatabaseHelper;
 import com.pshkrh.notes.Helper.SnackbarHelper;
 import com.pshkrh.notes.Model.Note;
 
+import io.github.inflationx.calligraphy3.CalligraphyConfig;
+import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
+import io.github.inflationx.viewpump.ViewPump;
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
+
 public class ViewNoteActivity extends AppCompatActivity {
 
     public static String TAG = "ViewNoteActivity";
@@ -47,15 +52,14 @@ public class ViewNoteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_note);
-        String activityName = getString(R.string.view_note);
-        SpannableString s = new SpannableString(activityName);
-        s.setSpan(new TypefaceSpan(mContext, "Raleway-Medium.ttf"), 0, s.length(),
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-        // Update the action bar title with the TypefaceSpan instance
-        ActionBar actionBar = getSupportActionBar();
-        if(actionBar!=null)
-            actionBar.setTitle(s);
+        ViewPump.init(ViewPump.builder()
+                .addInterceptor(new CalligraphyInterceptor(
+                        new CalligraphyConfig.Builder()
+                                .setDefaultFontPath("fonts/Raleway-Medium.ttf")
+                                .setFontAttrId(R.attr.fontPath)
+                                .build()))
+                .build());
 
         title = getIntent().getStringExtra(TITLE);
         description = getIntent().getStringExtra(DESC);
@@ -196,6 +200,11 @@ public class ViewNoteActivity extends AppCompatActivity {
         SpannableString mNewTitle = new SpannableString(mi.getTitle());
         mNewTitle.setSpan(new CustomTypefaceSpan("" , font), 0 , mNewTitle.length(),  Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         mi.setTitle(mNewTitle);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
 
 }

@@ -49,6 +49,7 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".SearchResultsActivity"
+            android:label="@string/search_results"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

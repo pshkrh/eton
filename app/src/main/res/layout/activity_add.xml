@@ -37,8 +37,7 @@
             app:met_floatingLabel="highlight"
             app:met_textColor="@color/colorPrimaryText"
             app:met_textColorHint="@color/colorSecondaryText"
-            app:met_hideUnderline="true"
-            tools:fontPath="fonts/Raleway-Regular.ttf" />
+            app:met_hideUnderline="true" />
 
         <View
             android:layout_width="match_parent"
@@ -58,8 +57,7 @@
             app:met_floatingLabel="highlight"
             app:met_textColor="@color/colorPrimaryText"
             app:met_textColorHint="@color/colorSecondaryText"
-            app:met_hideUnderline="true"
-            tools:fontPath="fonts/Raleway-Regular.ttf" />
+            app:met_hideUnderline="true" />
 
     </LinearLayout>
 

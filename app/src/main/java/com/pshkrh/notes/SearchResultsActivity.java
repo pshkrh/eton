@@ -24,6 +24,11 @@ import com.pshkrh.notes.Model.Note;
 
 import java.util.ArrayList;
 
+import io.github.inflationx.calligraphy3.CalligraphyConfig;
+import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
+import io.github.inflationx.viewpump.ViewPump;
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
+
 public class SearchResultsActivity extends AppCompatActivity {
 
     Context mContext = this;
@@ -44,15 +49,13 @@ public class SearchResultsActivity extends AppCompatActivity {
         parentView = findViewById(R.id.search_coordinator);
         mDatabaseHelper = new DatabaseHelper(this);
 
-        String activityName = getString(R.string.search_results);
-        SpannableString s = new SpannableString(activityName);
-        s.setSpan(new TypefaceSpan(mContext, "Raleway-Medium.ttf"), 0, s.length(),
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        // Update the action bar title with the TypefaceSpan instance
-        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        if(actionBar!=null)
-            actionBar.setTitle(s);
+        ViewPump.init(ViewPump.builder()
+                .addInterceptor(new CalligraphyInterceptor(
+                        new CalligraphyConfig.Builder()
+                                .setDefaultFontPath("fonts/Raleway-Medium.ttf")
+                                .setFontAttrId(R.attr.fontPath)
+                                .build()))
+                .build());
 
         ArrayList<Note> searchedNotes = new ArrayList<Note>();
         searchAdapter = new SearchAdapter(this,searchedNotes);
@@ -128,5 +131,10 @@ public class SearchResultsActivity extends AppCompatActivity {
         Intent intent = new Intent(SearchResultsActivity.this,MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
 }

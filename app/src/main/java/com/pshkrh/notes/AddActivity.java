@@ -23,6 +23,11 @@ import com.pshkrh.notes.Helper.SnackbarHelper;
 import com.pshkrh.notes.Model.Note;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import io.github.inflationx.calligraphy3.CalligraphyConfig;
+import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
+import io.github.inflationx.viewpump.ViewPump;
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
+
 public class AddActivity extends AppCompatActivity {
 
     Context mContext = this;
@@ -35,26 +40,19 @@ public class AddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
-        String activityName = getString(R.string.add_note);
-        SpannableString s = new SpannableString(activityName);
-        s.setSpan(new TypefaceSpan(mContext, "Raleway-Medium.ttf"), 0, s.length(),
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ViewPump.init(ViewPump.builder()
+                .addInterceptor(new CalligraphyInterceptor(
+                        new CalligraphyConfig.Builder()
+                                .setDefaultFontPath("fonts/Raleway-Medium.ttf")
+                                .setFontAttrId(R.attr.fontPath)
+                                .build()))
+                .build());
 
         parentView = findViewById(R.id.add_coordinator);
         mDatabaseHelper = new DatabaseHelper(this);
 
-        // Update the action bar title with the TypefaceSpan instance
-        ActionBar actionBar = getSupportActionBar();
-        if(actionBar!=null)
-            actionBar.setTitle(s);
-
         final MaterialEditText title = findViewById(R.id.add_title);
         final MaterialEditText description = findViewById(R.id.description);
-
-        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Raleway-Medium.ttf");
-
-        title.setTypeface(font);
-        description.setTypeface(font);
 
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.add_fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -126,5 +124,10 @@ public class AddActivity extends AppCompatActivity {
         else{
             SnackbarHelper.snackShort(parentView,"Could not insert data.");
         }
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
 }

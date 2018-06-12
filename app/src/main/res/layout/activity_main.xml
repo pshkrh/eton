@@ -54,7 +54,6 @@
                 android:contentDescription="@string/empty_list_image"
                 android:drawablePadding="10dp"
                 android:drawableTop="@drawable/ic_clipboard"
-                android:fontFamily="@font/raleway"
                 android:text="@string/empty_list"
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimaryDark" />

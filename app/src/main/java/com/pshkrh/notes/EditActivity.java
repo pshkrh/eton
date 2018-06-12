@@ -19,6 +19,11 @@ import com.pshkrh.notes.Helper.DatabaseHelper;
 import com.pshkrh.notes.Helper.SnackbarHelper;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import io.github.inflationx.calligraphy3.CalligraphyConfig;
+import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
+import io.github.inflationx.viewpump.ViewPump;
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
+
 public class EditActivity extends AppCompatActivity {
 
     public static String TITLE = "Title";
@@ -39,23 +44,17 @@ public class EditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
-        String activityName = getString(R.string.edit_note);
-        SpannableString s = new SpannableString(activityName);
-        s.setSpan(new TypefaceSpan(mContext, "Raleway-Medium.ttf"), 0, s.length(),
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-        // Update the action bar title with the TypefaceSpan instance
-        ActionBar actionBar = getSupportActionBar();
-        if(actionBar!=null)
-            actionBar.setTitle(s);
+        ViewPump.init(ViewPump.builder()
+                .addInterceptor(new CalligraphyInterceptor(
+                        new CalligraphyConfig.Builder()
+                                .setDefaultFontPath("fonts/Raleway-Medium.ttf")
+                                .setFontAttrId(R.attr.fontPath)
+                                .build()))
+                .build());
 
         final MaterialEditText title = findViewById(R.id.edit_title);
         final MaterialEditText description = findViewById(R.id.edit_description);
-
-        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Raleway-Medium.ttf");
-
-        title.setTypeface(font);
-        description.setTypeface(font);
 
         intentTitle = getIntent().getStringExtra(TITLE);
         intentDescription = getIntent().getStringExtra(DESC);
@@ -130,5 +129,10 @@ public class EditActivity extends AppCompatActivity {
                 }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
 }

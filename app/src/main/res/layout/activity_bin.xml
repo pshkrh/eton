@@ -8,7 +8,8 @@
     android:background="?android:attr/selectableItemBackground"
     android:fitsSystemWindows="true"
     android:focusable="true"
-    tools:context="com.pshkrh.notes.BinActivity">
+    tools:context="com.pshkrh.notes.BinActivity"
+    tools:ignore="MissingPrefix">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/bin_recycler"
@@ -35,7 +36,7 @@
             android:contentDescription="@string/empty_list_image"
             android:drawableTop="@drawable/trash"
             android:drawablePadding="10dp"
-            android:fontFamily="@font/raleway"
+            fontPath="fonts/Raleway-Regular.ttf"
             android:gravity="center"
             android:text="@string/bin_empty"
             android:textAlignment="center"
