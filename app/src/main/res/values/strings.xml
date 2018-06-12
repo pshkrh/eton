@@ -59,11 +59,25 @@
     <string name="connect_with_me">Connect With Me</string>
     <string name="github_link">https://github.com/pshkrh</string>
     <string name="linkedin_link">https://www.linkedin.com/in/pshkrh/</string>
+    <string name="lib">Libraries Used</string>
+    <string name="source_code">Source Code &amp; License</string>
+    <string name="code">Source Code</string>
+    <string name="source_code_info">This app is open source! You can contribute to the app here: https:/github.com/pshkrh/notes/</string>
+    <string name="license">License</string>
 
     <string-array name="about_array">
         <item>Source Code &amp; License</item>
         <item>Libraries Used</item>
-        <item>Rate the Application</item>
+        <item>Rate this App</item>
+        <item>Visit my Website</item>
+        <item>Check out my other Apps</item>
+    </string-array>
+
+    <string-array name="lib_array">
+        <item>Android Design Support Library</item>
+        <item>Calligraphy</item>
+        <item>Material Dialogs</item>
+        <item>Material Edit Text</item>
     </string-array>
 
     <!-- Strings related to Settings -->

@@ -1,5 +1,6 @@
 package com.pshkrh.notes;
 
+import android.animation.Animator;
 import android.app.SearchManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -8,7 +9,9 @@ import android.database.Cursor;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DividerItemDecoration;
@@ -18,6 +21,7 @@ import android.support.v7.widget.SearchView;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.SubMenu;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -50,11 +54,14 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static String TAG = "MainActivity";
+
     public ArrayList<Note> notes = new ArrayList<Note>();
     public int starred=0;
 
     public DatabaseHelper mDatabaseHelper;
     public View parentView;
+    private DrawerLayout drawer;
+    private ActionBarDrawerToggle toggle;
 
     public String binResult="";
     public String deleteResult="";
@@ -92,8 +99,8 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -355,9 +362,6 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // set item as selected to persist highlight
-        //item.setChecked(true);
-
         int id = item.getItemId();
 
         if (id == R.id.nav_notes) {
@@ -399,5 +403,7 @@ public class MainActivity extends AppCompatActivity
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
+
+
 
 }

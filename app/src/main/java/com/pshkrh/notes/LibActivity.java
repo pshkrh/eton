@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.pshkrh.notes.Helper.SnackbarHelper;
@@ -18,15 +17,14 @@ import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
 import io.github.inflationx.viewpump.ViewPump;
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
-public class AboutActivity extends AppCompatActivity {
+public class LibActivity extends AppCompatActivity {
 
-    Context mContext = this;
-    View parentView;
+    private View parentView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about);
+        setContentView(R.layout.activity_lib);
 
         ViewPump.init(ViewPump.builder()
                 .addInterceptor(new CalligraphyInterceptor(
@@ -36,35 +34,14 @@ public class AboutActivity extends AppCompatActivity {
                                 .build()))
                 .build());
 
-        parentView = findViewById(R.id.about_coordinator);
+        parentView = findViewById(R.id.lib_linear);
 
-        ImageView github = findViewById(R.id.github_button);
-        ImageView linkedin = findViewById(R.id.linkedin_button);
-
-        github.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String link = getResources().getString(R.string.github_link);
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
-                startActivity(intent);
-            }
-        });
-
-        linkedin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String link = getResources().getString(R.string.linkedin_link);
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
-                startActivity(intent);
-            }
-        });
-
-        String[] list = getResources().getStringArray(R.array.about_array);
+        String[] list = getResources().getStringArray(R.array.lib_array);
 
         ArrayAdapter<String> itemsAdapter =
                 new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
 
-        ListView listView = findViewById(R.id.about_listview);
+        ListView listView = findViewById(R.id.lib_listview);
         listView.setAdapter(itemsAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -72,30 +49,23 @@ public class AboutActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 switch(i){
                     case 0:
-                        Intent intent = new Intent(AboutActivity.this,CodeLicenseActivity.class);
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://developer.android.com/topic/libraries/support-library/"));
                         startActivity(intent);
                         break;
-
                     case 1:
-                        intent = new Intent(AboutActivity.this,LibActivity.class);
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/InflationX/Calligraphy"));
                         startActivity(intent);
                         break;
 
                     case 2:
-                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.pshkrh.notes>"));
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/afollestad/material-dialogs/"));
                         startActivity(intent);
                         break;
 
                     case 3:
-                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://pshkrh.com/"));
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/rengwuxian/MaterialEditText"));
                         startActivity(intent);
                         break;
-
-                    case 4:
-                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/developer?id=Pushkar+Kurhekar"));
-                        startActivity(intent);
-                        break;
-
                 }
             }
         });

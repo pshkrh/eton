@@ -62,10 +62,17 @@
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
-        <activity android:name=".AboutActivity"
+        <activity
+            android:name=".AboutActivity"
             android:label="@string/about"
-            android:parentActivityName=".MainActivity">
-        </activity>
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".LibActivity"
+            android:label="@string/lib"
+            android:parentActivityName=".AboutActivity"></activity>
+        <activity android:name=".CodeLicenseActivity"
+            android:label="@string/source_code"
+            android:parentActivityName=".AboutActivity"></activity>
     </application>
 
 </manifest>
