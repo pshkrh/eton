@@ -3,6 +3,7 @@ package com.pshkrh.notes;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.util.Linkify;
 import android.widget.TextView;
 
 import io.github.inflationx.calligraphy3.CalligraphyConfig;
@@ -25,10 +26,13 @@ public class CodeLicenseActivity extends AppCompatActivity {
                                 .build()))
                 .build());
 
+        TextView sourceCode = findViewById(R.id.source_code_link);
+        Linkify.addLinks(sourceCode,Linkify.ALL);
+
         TextView licenseView = findViewById(R.id.license_text);
         String license = "MIT License\n" +
                 "\n" +
-                "Copyright &#169; 2018 Pushkar Kurhekar\n" +
+                "Copyright " + "\u00a9" + " 2018 Pushkar Kurhekar\n" +
                 "\n" +
                 "Permission is hereby granted, free of charge, to any person obtaining a copy " +
                 "of this software and associated documentation files (the \"Software\"), to deal " +

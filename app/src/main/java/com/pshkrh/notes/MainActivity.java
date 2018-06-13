@@ -5,11 +5,13 @@ import android.app.SearchManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -76,6 +78,11 @@ public class MainActivity extends AppCompatActivity
         toolbar.setTitleTextAppearance(this, R.style.RalewayTextAppearance);
         setSupportActionBar(toolbar);
 
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String sortPref = sharedPref.getString(SettingsActivity.KEY_SORT, "");
+
         ViewPump.init(ViewPump.builder()
                 .addInterceptor(new CalligraphyInterceptor(
                         new CalligraphyConfig.Builder()
@@ -130,9 +137,24 @@ public class MainActivity extends AppCompatActivity
         // RecyclerView Binding
         RecyclerView recyclerView = (RecyclerView)findViewById(R.id.main_recycler);
 
-        populateRecycler();
+        Log.d(TAG,"Sort Preference = " + sortPref);
+        switch(sortPref){
 
-        NoteAdapter noteAdapter;noteAdapter = new NoteAdapter(notes);
+            case "0":
+                displayAlphabeticallySorted();
+                break;
+
+            case "1":
+                displayAscendingSorted();
+                break;
+
+            case "2":
+                displayDescendingSorted();
+                break;
+        }
+
+        NoteAdapter noteAdapter;
+        noteAdapter = new NoteAdapter(notes);
         recyclerView.setAdapter(noteAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -159,6 +181,7 @@ public class MainActivity extends AppCompatActivity
             RelativeLayout emptyList = (RelativeLayout)findViewById(R.id.placeholder_view);
             emptyList.setVisibility(View.VISIBLE);
         }
+
     }
 
     private void intentResultCheck(){
@@ -385,6 +408,9 @@ public class MainActivity extends AppCompatActivity
             startActivity(Intent.createChooser(emailIntent, "Send mail using..."));
 
         } else if (id == R.id.nav_settings) {
+            Intent intent = new Intent(MainActivity.this,SettingsActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
