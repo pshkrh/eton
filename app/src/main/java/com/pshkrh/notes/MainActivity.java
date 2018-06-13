@@ -70,6 +70,8 @@ public class MainActivity extends AppCompatActivity
     public String addResult="";
     public String editResult="";
 
+    private int clickedItem;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme_NoActionBar);
@@ -109,7 +111,20 @@ public class MainActivity extends AppCompatActivity
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
+
+            @Override
+            public void onDrawerClosed(View drawerView)
+            {
+                super.onDrawerClosed(drawerView);
+
+                if(clickedItem != 0)
+                {
+                    handleNavigationClick();
+                }
+            }
+
+        };
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -386,37 +401,51 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        int id = item.getItemId();
+        clickedItem = item.getItemId();
+        drawer.closeDrawers();
+        return true;
+    }
 
-        if (id == R.id.nav_notes) {
-            Snackbar.make(findViewById(R.id.coordinator),R.string.already_here,Snackbar.LENGTH_LONG).show();
-        } else if (id == R.id.nav_bin) {
-            Intent intent = new Intent(MainActivity.this, BinActivity.class);
-            startActivity(intent);
-            finish();
-        } else if (id == R.id.nav_export) {
-            Snackbar.make(findViewById(R.id.coordinator),R.string.coming_soon,Snackbar.LENGTH_LONG).show();
-        } else if (id == R.id.nav_about) {
-            Intent intent = new Intent(MainActivity.this,AboutActivity.class);
-            startActivity(intent);
-        } else if(id == R.id.nav_contact) {
-            Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-            emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            emailIntent.setType("vnd.android.cursor.item/email");
-            emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {"dev@pshkrh.com"});
-            emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Feedback / Query regarding Notes");
-            emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "");
-            startActivity(Intent.createChooser(emailIntent, "Send mail using..."));
+    private void handleNavigationClick(){
+        switch(clickedItem){
+            case R.id.nav_notes:
+                Snackbar.make(findViewById(R.id.coordinator),R.string.already_here,Snackbar.LENGTH_LONG).show();
+                break;
 
-        } else if (id == R.id.nav_settings) {
-            Intent intent = new Intent(MainActivity.this,SettingsActivity.class);
-            startActivity(intent);
-            finish();
+            case R.id.nav_bin:
+                Intent intent = new Intent(MainActivity.this, BinActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+
+            case R.id.nav_export:
+                Snackbar.make(findViewById(R.id.coordinator),R.string.coming_soon,Snackbar.LENGTH_LONG).show();
+                break;
+
+            case R.id.nav_about:
+                intent = new Intent(MainActivity.this,AboutActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.nav_contact:
+                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+                emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                emailIntent.setType("vnd.android.cursor.item/email");
+                emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {"dev@pshkrh.com"});
+                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Feedback / Query regarding Notes");
+                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "");
+                startActivity(Intent.createChooser(emailIntent, "Send mail using..."));
+                break;
+
+            case R.id.nav_settings:
+                intent = new Intent(MainActivity.this,SettingsActivity.class);
+                startActivity(intent);
+                finish();
+                break;
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return false;
+        clickedItem = 0;
+
     }
 
     private void applyFontToMenuItem(MenuItem mi) {
