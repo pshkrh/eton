@@ -438,50 +438,55 @@ public class MainActivity extends AppCompatActivity
                 break;
 
             case R.id.nav_export:
-                if(storagePermissionChecker()){
-                    new MaterialDialog.Builder(this)
-                            .title(R.string.export_notes)
-                            .content(R.string.export_info_no_perm)
-                            .positiveText(R.string.export)
-                            .onPositive(new MaterialDialog.SingleButtonCallback() {
-                                @Override
-                                public void onClick(MaterialDialog dialog, DialogAction which) {
-                                    //permissionsPrompt();
-                                    export(notes);
-                                }
-                            })
-                            .negativeText(R.string.cancel)
-                            .onNegative(new MaterialDialog.SingleButtonCallback() {
-                                @Override
-                                public void onClick(MaterialDialog dialog, DialogAction which) {
-                                    dialog.dismiss();
-                                }
-                            })
-                            .icon(getResources().getDrawable(R.drawable.comment_question,getTheme()))
-                            .typeface("Raleway-Medium.ttf","Raleway-Regular.ttf")
-                            .show();
+                if(notes.size()>0){
+                    if(storagePermissionChecker()){
+                        new MaterialDialog.Builder(this)
+                                .title(R.string.export_notes)
+                                .content(R.string.export_info_no_perm)
+                                .positiveText(R.string.export)
+                                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                    @Override
+                                    public void onClick(MaterialDialog dialog, DialogAction which) {
+                                        //permissionsPrompt();
+                                        export(notes);
+                                    }
+                                })
+                                .negativeText(R.string.cancel)
+                                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                                    @Override
+                                    public void onClick(MaterialDialog dialog, DialogAction which) {
+                                        dialog.dismiss();
+                                    }
+                                })
+                                .icon(getResources().getDrawable(R.drawable.comment_question,getTheme()))
+                                .typeface("Raleway-Medium.ttf","Raleway-Regular.ttf")
+                                .show();
+                    }
+                    else{
+                        new MaterialDialog.Builder(this)
+                                .title(R.string.export_notes)
+                                .content(R.string.export_info)
+                                .positiveText(R.string.export)
+                                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                    @Override
+                                    public void onClick(MaterialDialog dialog, DialogAction which) {
+                                        permissionsPrompt();
+                                    }
+                                })
+                                .negativeText(R.string.cancel)
+                                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                                    @Override
+                                    public void onClick(MaterialDialog dialog, DialogAction which) {
+                                        dialog.dismiss();
+                                    }
+                                })
+                                .icon(getResources().getDrawable(R.drawable.comment_question,getTheme()))
+                                .typeface("Raleway-Medium.ttf","Raleway-Regular.ttf")
+                                .show();
+                    }
                 }
                 else{
-                    new MaterialDialog.Builder(this)
-                            .title(R.string.export_notes)
-                            .content(R.string.export_info)
-                            .positiveText(R.string.export)
-                            .onPositive(new MaterialDialog.SingleButtonCallback() {
-                                @Override
-                                public void onClick(MaterialDialog dialog, DialogAction which) {
-                                    permissionsPrompt();
-                                }
-                            })
-                            .negativeText(R.string.cancel)
-                            .onNegative(new MaterialDialog.SingleButtonCallback() {
-                                @Override
-                                public void onClick(MaterialDialog dialog, DialogAction which) {
-                                    dialog.dismiss();
-                                }
-                            })
-                            .icon(getResources().getDrawable(R.drawable.comment_question,getTheme()))
-                            .typeface("Raleway-Medium.ttf","Raleway-Regular.ttf")
-                            .show();
+                    SnackbarHelper.snackLong(parentView,"No Notes to Export!");
                 }
                 break;
 
