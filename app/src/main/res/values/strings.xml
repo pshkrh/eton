@@ -64,6 +64,9 @@
     <string name="code">Source Code</string>
     <string name="source_code_info">This app is open source! You can contribute to the app here: https://github.com/pshkrh/notes/</string>
     <string name="license">License</string>
+    <string name="export_notes">Export Notes</string>
+    <string name="export_info">This will export all your notes to a text file in your phone\'s internal memory.\n\nFor this, the app requires you to provide Storage permissions.</string>
+    <string name="export_info_no_perm">This will export all your notes to a text file in your phone\'s internal memory.</string>
 
     <string-array name="about_array">
         <item>Source Code &amp; License</item>

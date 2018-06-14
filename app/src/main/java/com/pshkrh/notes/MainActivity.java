@@ -1,21 +1,26 @@
 package com.pshkrh.notes;
 
+import android.Manifest;
 import android.animation.Animator;
 import android.app.SearchManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -39,12 +44,21 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.pshkrh.notes.Adapter.NoteAdapter;
 import com.pshkrh.notes.Helper.DatabaseHelper;
 import com.pshkrh.notes.Helper.SnackbarHelper;
 import com.pshkrh.notes.Model.Note;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import io.github.inflationx.calligraphy3.CalligraphyConfig;
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
@@ -56,6 +70,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static String TAG = "MainActivity";
+    public static final int PERMISSIONS_REQUEST_WRITE_STORAGE = 1;
 
     public ArrayList<Note> notes = new ArrayList<Note>();
     public int starred=0;
@@ -342,7 +357,10 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         }
     }
 
@@ -419,7 +437,51 @@ public class MainActivity extends AppCompatActivity
                 break;
 
             case R.id.nav_export:
-                Snackbar.make(findViewById(R.id.coordinator),R.string.coming_soon,Snackbar.LENGTH_LONG).show();
+                if(storagePermissionChecker()){
+                    new MaterialDialog.Builder(this)
+                            .title(R.string.export_notes)
+                            .content(R.string.export_info_no_perm)
+                            .positiveText(R.string.yes)
+                            .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(MaterialDialog dialog, DialogAction which) {
+                                    //permissionsPrompt();
+                                    export(notes);
+                                }
+                            })
+                            .negativeText(R.string.no)
+                            .onNegative(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(MaterialDialog dialog, DialogAction which) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .icon(getResources().getDrawable(R.drawable.comment_question,getTheme()))
+                            .typeface("Raleway-Medium.ttf","Raleway-Regular.ttf")
+                            .show();
+                }
+                else{
+                    new MaterialDialog.Builder(this)
+                            .title(R.string.export_notes)
+                            .content(R.string.export_info)
+                            .positiveText(R.string.yes)
+                            .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(MaterialDialog dialog, DialogAction which) {
+                                    permissionsPrompt();
+                                }
+                            })
+                            .negativeText(R.string.no)
+                            .onNegative(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(MaterialDialog dialog, DialogAction which) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .icon(getResources().getDrawable(R.drawable.comment_question,getTheme()))
+                            .typeface("Raleway-Medium.ttf","Raleway-Regular.ttf")
+                            .show();
+                }
                 break;
 
             case R.id.nav_about:
@@ -460,6 +522,73 @@ public class MainActivity extends AppCompatActivity
         super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
 
+    private void export(ArrayList<Note> notes){
+        //Prepare String for all notes
+        StringBuilder content = new StringBuilder();
+        for(Note tempNote : notes){
+            content.append(tempNote.getTitle()).append("\n\n")
+                    .append(tempNote.getDescription())
+                    .append("\n\n")
+                    .append(tempNote.getDate())
+                    .append("\n\n")
+                    .append("---------------------------------------------")
+                    .append("\n\n");
+        }
 
+        String fileContent = content.toString();
+
+        //Write file to internal memory
+        File file;
+        FileOutputStream outputStream;
+        try {
+            Log.d(TAG,"export: Writing file");
+            Date date = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyHHmmss", Locale.ENGLISH);
+            String fileName = "Notes-" + sdf.format(date) + ".txt";
+            file = new File(Environment.getExternalStorageDirectory(), fileName);
+            outputStream = new FileOutputStream(file);
+            outputStream.write(fileContent.getBytes());
+            outputStream.close();
+            SnackbarHelper.snackLong(parentView,"Notes Exported to Internal Storage!\n" + "File Name: " + fileName);
+            Log.d(TAG,"export: File Written");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.d(TAG,"export: File write failed");
+            SnackbarHelper.snackShort(parentView,"File Export Failed");
+        }
+    }
+
+    private void permissionsPrompt() {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    PERMISSIONS_REQUEST_WRITE_STORAGE);
+    }
+
+    private boolean storagePermissionChecker(){
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_WRITE_STORAGE: {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d(TAG,"Permission OK");
+                    export(notes);
+                } else {
+                    Log.d(TAG,"Permission NOT OK");
+                    SnackbarHelper.snackShort(parentView,"The permission needs to be granted for export to work!");
+                }
+            }
+        }
+    }
 
 }
