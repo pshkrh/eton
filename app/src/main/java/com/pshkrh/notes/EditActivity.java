@@ -86,8 +86,6 @@ public class EditActivity extends AppCompatActivity {
                     mDatabaseHelper.updateNote(editTitle,editDescription,itemID,starred);
                     Intent intent = new Intent(EditActivity.this, MainActivity.class);
                     intent.putExtra("editResult","Note Edited!");
-                    // Clear the back stack of activities
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 
                     //Start the activity and finish the current one
                     startActivity(intent);
