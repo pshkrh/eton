@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -441,7 +442,7 @@ public class MainActivity extends AppCompatActivity
                     new MaterialDialog.Builder(this)
                             .title(R.string.export_notes)
                             .content(R.string.export_info_no_perm)
-                            .positiveText(R.string.yes)
+                            .positiveText(R.string.export)
                             .onPositive(new MaterialDialog.SingleButtonCallback() {
                                 @Override
                                 public void onClick(MaterialDialog dialog, DialogAction which) {
@@ -449,7 +450,7 @@ public class MainActivity extends AppCompatActivity
                                     export(notes);
                                 }
                             })
-                            .negativeText(R.string.no)
+                            .negativeText(R.string.cancel)
                             .onNegative(new MaterialDialog.SingleButtonCallback() {
                                 @Override
                                 public void onClick(MaterialDialog dialog, DialogAction which) {
@@ -464,14 +465,14 @@ public class MainActivity extends AppCompatActivity
                     new MaterialDialog.Builder(this)
                             .title(R.string.export_notes)
                             .content(R.string.export_info)
-                            .positiveText(R.string.yes)
+                            .positiveText(R.string.export)
                             .onPositive(new MaterialDialog.SingleButtonCallback() {
                                 @Override
                                 public void onClick(MaterialDialog dialog, DialogAction which) {
                                     permissionsPrompt();
                                 }
                             })
-                            .negativeText(R.string.no)
+                            .negativeText(R.string.cancel)
                             .onNegative(new MaterialDialog.SingleButtonCallback() {
                                 @Override
                                 public void onClick(MaterialDialog dialog, DialogAction which) {
@@ -490,13 +491,11 @@ public class MainActivity extends AppCompatActivity
                 break;
 
             case R.id.nav_contact:
-                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-                emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                emailIntent.setType("vnd.android.cursor.item/email");
-                emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {"dev@pshkrh.com"});
-                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Feedback / Query regarding Notes");
-                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "");
-                startActivity(Intent.createChooser(emailIntent, "Send mail using..."));
+                intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:"));
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"dev@pshkrh.com"});
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Feedback / Query regarding Notes");
+                startActivity(Intent.createChooser(intent, "Send mail using..."));
                 break;
 
             case R.id.nav_settings:
