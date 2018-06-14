@@ -140,9 +140,6 @@ public class ViewNoteActivity extends AppCompatActivity {
                                 Intent intent = new Intent(ViewNoteActivity.this, MainActivity.class);
                                 intent.putExtra("deleteResult","Note has been moved to Bin");
 
-                                // Clear the back stack of activities
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-
                                 //Start the activity and finish the current one
                                 startActivity(intent);
                                 finish();
