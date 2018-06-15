@@ -39,7 +39,7 @@
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
                     android:textColor="@color/white"
-                    android:padding="5dp"/>
+                    android:paddingBottom="5dp"/>
 
             </LinearLayout>
 
