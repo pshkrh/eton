@@ -542,14 +542,23 @@ public class MainActivity extends AppCompatActivity
         String fileContent = content.toString();
 
         //Write file to internal memory
-        File file;
+        File file,folder;
         FileOutputStream outputStream;
         try {
             Log.d(TAG,"export: Writing file");
             Date date = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyHHmmss", Locale.ENGLISH);
             String fileName = "Notes-" + sdf.format(date) + ".txt";
-            file = new File(Environment.getExternalStorageDirectory(), fileName);
+            folder = new File(Environment.getExternalStorageDirectory(), "NotesApp");
+            boolean checkExists = true;
+            if(!folder.exists()){
+                checkExists = folder.mkdirs();
+            }
+            if(!checkExists){
+                Log.d(TAG,"export: Export fail, directory does not exist");
+                return;
+            }
+            file = new File(folder,fileName);
             outputStream = new FileOutputStream(file);
             outputStream.write(fileContent.getBytes());
             outputStream.close();
