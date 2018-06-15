@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.pshkrh.notes.Helper.SnackbarHelper;
 
@@ -35,6 +36,10 @@ public class AboutActivity extends AppCompatActivity {
                                 .setFontAttrId(R.attr.fontPath)
                                 .build()))
                 .build());
+
+        TextView version = findViewById(R.id.version);
+        String ver = "Version " + BuildConfig.VERSION_NAME;
+        version.setText(ver);
 
         parentView = findViewById(R.id.about_coordinator);
 
@@ -96,6 +101,9 @@ public class AboutActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
 
+                    case 5:
+                        SnackbarHelper.snackLong(parentView,"Special Thanks to Aniruddh Iyer for the Logo Design!");
+                        break;
                 }
             }
         });
