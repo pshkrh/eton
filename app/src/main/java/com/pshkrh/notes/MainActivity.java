@@ -562,7 +562,7 @@ public class MainActivity extends AppCompatActivity
             outputStream = new FileOutputStream(file);
             outputStream.write(fileContent.getBytes());
             outputStream.close();
-            SnackbarHelper.snackLong(parentView,"Notes Exported to Internal Storage!\n" + "File Name: " + fileName);
+            SnackbarHelper.snackLong(parentView,"Notes Exported!\n" + "Location: Internal Storage/NotesApp/");
             Log.d(TAG,"export: File Written");
         } catch (IOException e) {
             e.printStackTrace();
