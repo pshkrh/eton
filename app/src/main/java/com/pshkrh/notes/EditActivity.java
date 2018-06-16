@@ -9,6 +9,7 @@ import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.view.Menu;
@@ -54,7 +55,9 @@ public class EditActivity extends AppCompatActivity {
                 .build());
 
         final MaterialEditText title = findViewById(R.id.edit_title);
+        title.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
         final MaterialEditText description = findViewById(R.id.edit_description);
+        description.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
 
         intentTitle = getIntent().getStringExtra(TITLE);
         intentDescription = getIntent().getStringExtra(DESC);

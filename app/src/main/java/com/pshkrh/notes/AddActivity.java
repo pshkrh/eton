@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.view.Menu;
@@ -52,7 +53,9 @@ public class AddActivity extends AppCompatActivity {
         mDatabaseHelper = new DatabaseHelper(this);
 
         final MaterialEditText title = findViewById(R.id.add_title);
+        title.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
         final MaterialEditText description = findViewById(R.id.description);
+        description.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
 
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.add_fab);
         fab.setOnClickListener(new View.OnClickListener() {
