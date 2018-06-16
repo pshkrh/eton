@@ -36,11 +36,12 @@
             android:contentDescription="@string/empty_list_image"
             android:drawableTop="@drawable/trash"
             android:drawablePadding="10dp"
+            android:textSize="16sp"
             fontPath="fonts/Raleway-Regular.ttf"
             android:gravity="center"
             android:text="@string/bin_empty"
             android:textAlignment="center"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/colorPrimaryDark" />
 
     </RelativeLayout>
 
