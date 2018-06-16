@@ -1,10 +1,16 @@
 package com.pshkrh.eton;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import io.github.inflationx.calligraphy3.CalligraphyConfig;
+import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
+import io.github.inflationx.viewpump.ViewPump;
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
 public class SettingsActivity extends AppCompatPreferenceActivity {
     private static final String TAG = SettingsActivity.class.getSimpleName();
@@ -17,6 +23,15 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 .replace(android.R.id.content, new SettingsFragment())
                 .commit();
         super.onCreate(savedInstanceState);
+
+        ViewPump.init(ViewPump.builder()
+                .addInterceptor(new CalligraphyInterceptor(
+                        new CalligraphyConfig.Builder()
+                                .setDefaultFontPath("fonts/Raleway-Medium.ttf")
+                                .setFontAttrId(R.attr.fontPath)
+                                .build()))
+                .build());
+
     }
 
     public static class SettingsFragment extends PreferenceFragment {
@@ -51,5 +66,10 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
 }
