@@ -1,4 +1,4 @@
-package com.pshkrh.notes.Helper;
+package com.pshkrh.eton.Helper;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.pshkrh.notes.Model.Note;
+import com.pshkrh.eton.Model.Note;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.CopyOnWriteArrayList;

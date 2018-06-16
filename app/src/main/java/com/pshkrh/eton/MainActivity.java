@@ -1,4 +1,4 @@
-package com.pshkrh.notes;
+package com.pshkrh.eton;
 
 import android.Manifest;
 import android.animation.Animator;
@@ -47,10 +47,10 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.pshkrh.notes.Adapter.NoteAdapter;
-import com.pshkrh.notes.Helper.DatabaseHelper;
-import com.pshkrh.notes.Helper.SnackbarHelper;
-import com.pshkrh.notes.Model.Note;
+import com.pshkrh.eton.Adapter.NoteAdapter;
+import com.pshkrh.eton.Helper.DatabaseHelper;
+import com.pshkrh.eton.Helper.SnackbarHelper;
+import com.pshkrh.eton.Model.Note;
 
 import java.io.File;
 import java.io.FileOutputStream;

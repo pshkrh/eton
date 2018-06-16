@@ -1,4 +1,4 @@
-package com.pshkrh.notes;
+package com.pshkrh.eton;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.pshkrh.notes.Helper.SnackbarHelper;
+import com.pshkrh.eton.Helper.SnackbarHelper;
 
 import io.github.inflationx.calligraphy3.CalligraphyConfig;
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor;

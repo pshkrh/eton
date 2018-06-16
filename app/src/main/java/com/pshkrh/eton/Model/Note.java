@@ -1,4 +1,4 @@
-package com.pshkrh.notes.Model;
+package com.pshkrh.eton.Model;
 
 import java.util.ArrayList;
 import java.util.List;

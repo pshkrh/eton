@@ -1,4 +1,4 @@
-package com.pshkrh.notes;
+package com.pshkrh.eton;
 
 import android.graphics.Paint;
 import android.graphics.Typeface;

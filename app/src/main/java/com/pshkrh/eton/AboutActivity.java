@@ -1,4 +1,4 @@
-package com.pshkrh.notes;
+package com.pshkrh.eton;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.pshkrh.notes.Helper.SnackbarHelper;
+import com.pshkrh.eton.Helper.SnackbarHelper;
 
 import io.github.inflationx.calligraphy3.CalligraphyConfig;
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
@@ -87,7 +87,7 @@ public class AboutActivity extends AppCompatActivity {
                         break;
 
                     case 2:
-                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.pshkrh.notes>"));
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.pshkrh.eton>"));
                         startActivity(intent);
                         break;
 

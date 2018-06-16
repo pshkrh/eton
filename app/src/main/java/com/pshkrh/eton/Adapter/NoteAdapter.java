@@ -1,4 +1,4 @@
-package com.pshkrh.notes.Adapter;
+package com.pshkrh.eton.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,9 +17,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.pshkrh.notes.Model.Note;
-import com.pshkrh.notes.R;
-import com.pshkrh.notes.ViewNoteActivity;
+import com.pshkrh.eton.Model.Note;
+import com.pshkrh.eton.R;
+import com.pshkrh.eton.ViewNoteActivity;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.pshkrh.notes;
+package com.pshkrh.eton;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;

@@ -1,4 +1,4 @@
-package com.pshkrh.notes.Helper;
+package com.pshkrh.eton.Helper;
 
 import android.support.design.widget.Snackbar;
 import android.view.View;

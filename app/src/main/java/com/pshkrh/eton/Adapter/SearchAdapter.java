@@ -1,4 +1,4 @@
-package com.pshkrh.notes.Adapter;
+package com.pshkrh.eton.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,8 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.pshkrh.notes.Model.Note;
-import com.pshkrh.notes.R;
+import com.pshkrh.eton.Model.Note;
+import com.pshkrh.eton.R;
 
 import org.w3c.dom.Text;
 

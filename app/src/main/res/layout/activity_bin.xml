@@ -8,7 +8,7 @@
     android:background="?android:attr/selectableItemBackground"
     android:fitsSystemWindows="true"
     android:focusable="true"
-    tools:context="com.pshkrh.notes.BinActivity"
+    tools:context="com.pshkrh.eton.BinActivity"
     tools:ignore="MissingPrefix">
 
     <android.support.v7.widget.RecyclerView

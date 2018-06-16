@@ -1,4 +1,4 @@
-package com.pshkrh.notes;
+package com.pshkrh.eton;
 
 import android.app.ActionBar;
 import android.app.SearchManager;
@@ -17,10 +17,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 
-import com.pshkrh.notes.Adapter.SearchAdapter;
-import com.pshkrh.notes.Helper.DatabaseHelper;
-import com.pshkrh.notes.Helper.SnackbarHelper;
-import com.pshkrh.notes.Model.Note;
+import com.pshkrh.eton.Adapter.SearchAdapter;
+import com.pshkrh.eton.Helper.DatabaseHelper;
+import com.pshkrh.eton.Helper.SnackbarHelper;
+import com.pshkrh.eton.Model.Note;
 
 import java.util.ArrayList;
 

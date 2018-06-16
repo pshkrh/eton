@@ -1,4 +1,4 @@
-package com.pshkrh.notes;
+package com.pshkrh.eton;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,9 +19,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.pshkrh.notes.Helper.DatabaseHelper;
-import com.pshkrh.notes.Helper.SnackbarHelper;
-import com.pshkrh.notes.Model.Note;
+import com.pshkrh.eton.Helper.DatabaseHelper;
+import com.pshkrh.eton.Helper.SnackbarHelper;
+import com.pshkrh.eton.Model.Note;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import io.github.inflationx.calligraphy3.CalligraphyConfig;

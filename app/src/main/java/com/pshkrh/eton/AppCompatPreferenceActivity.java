@@ -1,4 +1,4 @@
-package com.pshkrh.notes;
+package com.pshkrh.eton;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

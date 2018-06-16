@@ -1,4 +1,4 @@
-package com.pshkrh.notes;
+package com.pshkrh.eton;
 
 import android.database.Cursor;
 import android.support.design.widget.FloatingActionButton;
@@ -17,12 +17,12 @@ import android.text.SpannableString;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.pshkrh.notes.Adapter.DeletedNoteAdapter;
-import com.pshkrh.notes.Adapter.NoteAdapter;
-import com.pshkrh.notes.Helper.DatabaseHelper;
-import com.pshkrh.notes.Helper.SnackbarHelper;
-import com.pshkrh.notes.Model.Note;
-import com.pshkrh.notes.TypefaceSpan;
+import com.pshkrh.eton.Adapter.DeletedNoteAdapter;
+import com.pshkrh.eton.Adapter.NoteAdapter;
+import com.pshkrh.eton.Helper.DatabaseHelper;
+import com.pshkrh.eton.Helper.SnackbarHelper;
+import com.pshkrh.eton.Model.Note;
+import com.pshkrh.eton.TypefaceSpan;
 
 import android.util.Log;
 import android.view.Menu;

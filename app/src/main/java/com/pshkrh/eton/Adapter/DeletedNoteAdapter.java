@@ -1,4 +1,4 @@
-package com.pshkrh.notes.Adapter;
+package com.pshkrh.eton.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,13 +14,13 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.pshkrh.notes.Helper.DatabaseHelper;
-import com.pshkrh.notes.Helper.SnackbarHelper;
-import com.pshkrh.notes.MainActivity;
-import com.pshkrh.notes.Model.Note;
-import com.pshkrh.notes.R;
-import com.pshkrh.notes.BinActivity;
-import com.pshkrh.notes.ViewNoteActivity;
+import com.pshkrh.eton.Helper.DatabaseHelper;
+import com.pshkrh.eton.Helper.SnackbarHelper;
+import com.pshkrh.eton.MainActivity;
+import com.pshkrh.eton.Model.Note;
+import com.pshkrh.eton.R;
+import com.pshkrh.eton.BinActivity;
+import com.pshkrh.eton.ViewNoteActivity;
 
 import java.util.List;
 
