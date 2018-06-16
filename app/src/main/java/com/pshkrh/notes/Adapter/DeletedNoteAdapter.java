@@ -129,6 +129,7 @@ public class DeletedNoteAdapter extends RecyclerView.Adapter<DeletedNoteAdapter.
                         }
                     })
                     .icon(itemView.getResources().getDrawable(R.drawable.comment_question,context.getTheme()))
+                    .typeface("Raleway-Medium.ttf","Raleway-Regular.ttf")
                     .show();
         }
 

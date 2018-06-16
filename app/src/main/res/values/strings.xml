@@ -11,9 +11,9 @@
     <string name="export">Export</string>
     <string name="star">Star</string>
     <string name="sort">Sort</string>
-    <string name="sort_alphabetical">Sort Alphabetically</string>
-    <string name="sort_ascending">Sort by Date (Ascending)</string>
-    <string name="sort_descending">Sort by Date (Descending)</string>
+    <string name="sort_alphabetical">Alphabetical</string>
+    <string name="sort_ascending">Oldest Note First</string>
+    <string name="sort_descending">Newest Note First</string>
     <string name="application">Application</string>
     <string name="about">About</string>
     <string name="settings">Settings</string>
@@ -50,8 +50,8 @@
     <string name="delete_forever">Delete Forever</string>
     <string name="restore">Restore</string>
     <string name="delete_or_restore">Would you like to Restore the Note or Delete it?</string>
-    <string name="delete_all_notes">Delete All Notes</string>
-    <string name="delete_all_sure">Are you sure you want to permanently delete all the Notes?</string>
+    <string name="delete_all_notes">Empty Bin</string>
+    <string name="delete_all_sure">Are you sure you want to empty the Bin?</string>
     <string name="edit_description">Description</string>
     <string name="search_results">Search Results</string>
     <string name="title_activity_settings">Settings</string>
