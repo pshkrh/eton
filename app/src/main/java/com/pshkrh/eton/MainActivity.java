@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitleTextAppearance(this, R.style.RalewayTextAppearance);
+        toolbar.setTitle(R.string.notes);
         setSupportActionBar(toolbar);
 
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
@@ -499,7 +500,7 @@ public class MainActivity extends AppCompatActivity
                 intent = new Intent(Intent.ACTION_SENDTO);
                 intent.setData(Uri.parse("mailto:"));
                 intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"dev@pshkrh.com"});
-                intent.putExtra(Intent.EXTRA_SUBJECT, "Feedback / Query regarding Notes");
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Feedback / Query regarding Eton");
                 startActivity(Intent.createChooser(intent, "Send mail using..."));
                 break;
 
@@ -549,7 +550,7 @@ public class MainActivity extends AppCompatActivity
             Date date = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyHHmmss", Locale.ENGLISH);
             String fileName = "Notes-" + sdf.format(date) + ".txt";
-            folder = new File(Environment.getExternalStorageDirectory(), "NotesApp");
+            folder = new File(Environment.getExternalStorageDirectory(), "Eton");
             boolean checkExists = true;
             if(!folder.exists()){
                 checkExists = folder.mkdirs();
@@ -562,7 +563,7 @@ public class MainActivity extends AppCompatActivity
             outputStream = new FileOutputStream(file);
             outputStream.write(fileContent.getBytes());
             outputStream.close();
-            SnackbarHelper.snackLong(parentView,"Notes Exported!\n" + "Location: Internal Storage/NotesApp/");
+            SnackbarHelper.snackLong(parentView,"Notes Exported!\n" + "Location: Internal Storage/Eton/");
             Log.d(TAG,"export: File Written");
         } catch (IOException e) {
             e.printStackTrace();
