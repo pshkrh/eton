@@ -87,7 +87,7 @@ public class AboutActivity extends AppCompatActivity {
                         break;
 
                     case 2:
-                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.pshkrh.eton>"));
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.pshkrh.eton"));
                         startActivity(intent);
                         break;
 
