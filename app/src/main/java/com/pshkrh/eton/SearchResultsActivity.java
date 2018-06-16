@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 
 import com.pshkrh.eton.Adapter.SearchAdapter;
@@ -93,7 +94,8 @@ public class SearchResultsActivity extends AppCompatActivity {
             Cursor data = mDatabaseHelper.getSearchedData(query);
             if(data!=null){
                 if(data.getCount() == 0){
-                    SnackbarHelper.snackShort(parentView,"No results found!");
+                    RelativeLayout placeholder = findViewById(R.id.search_placeholder);
+                    placeholder.setVisibility(View.VISIBLE);
                 }
                 else{
                     while(data.moveToNext()){
