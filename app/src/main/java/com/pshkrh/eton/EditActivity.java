@@ -3,15 +3,10 @@ package com.pshkrh.eton;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Typeface;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TextInputEditText;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
-import android.text.Spannable;
-import android.text.SpannableString;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,13 +28,10 @@ public class EditActivity extends AppCompatActivity {
     public static String STAR = "Star";
 
     public int starred, itemID;
-    public Context mContext = this;
 
     public String intentTitle, intentDescription, intentDate;
 
     DatabaseHelper mDatabaseHelper;
-
-    //private Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +49,7 @@ public class EditActivity extends AppCompatActivity {
         final MaterialEditText title = findViewById(R.id.edit_title);
         title.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
         final MaterialEditText description = findViewById(R.id.edit_description);
-        description.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+        description.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
 
         intentTitle = getIntent().getStringExtra(TITLE);
         intentDescription = getIntent().getStringExtra(DESC);
@@ -78,7 +70,7 @@ public class EditActivity extends AppCompatActivity {
             SnackbarHelper.snackShort(findViewById(R.id.edit_coordinator), "No ID associated with that Note");
         }
 
-        FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.edit_fab);
+        FloatingActionButton fab = findViewById(R.id.edit_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
