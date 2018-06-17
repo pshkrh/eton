@@ -2,19 +2,10 @@ package com.pshkrh.eton;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TextInputEditText;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.text.InputType;
-import android.text.Spannable;
-import android.text.SpannableString;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,7 +22,6 @@ import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
 public class AddActivity extends AppCompatActivity {
 
-    Context mContext = this;
     int starred=0;
 
     public DatabaseHelper mDatabaseHelper;
@@ -55,13 +45,17 @@ public class AddActivity extends AppCompatActivity {
         final MaterialEditText title = findViewById(R.id.add_title);
         title.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
         final MaterialEditText description = findViewById(R.id.description);
-        description.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+        description.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+        description.requestFocus();
 
-        FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.add_fab);
+        FloatingActionButton fab = findViewById(R.id.add_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(title.length()!=0 && description.length()!=0){
+                if(title.length()==0){
+                    title.setText(R.string.untitled);
+                }
+                if(description.length()!=0){
                     Note note = new Note(title.getText().toString(),description.getText().toString(),starred);
                     insert(note);
                     title.setText("");
