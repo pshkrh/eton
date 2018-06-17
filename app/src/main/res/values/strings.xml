@@ -72,6 +72,7 @@
     <string name="linkedin_content_desc">Linkedin Logo</string>
     <string name="logo_content_desc">Eton App Logo</string>
     <string name="empty_search">No Search Results Found!</string>
+    <string name="untitled">Untitled Note</string>
 
     <string-array name="about_array">
         <item>Source Code &amp; License</item>
