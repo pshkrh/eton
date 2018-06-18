@@ -24,6 +24,6 @@ Key Features:
 
 
 Permissions:
--> Storage - Needed for Exporting notes
--> Nothing Else!
+- Storage => Needed for Exporting notes
+- Nothing Else!
 
