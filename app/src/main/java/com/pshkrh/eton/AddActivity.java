@@ -103,7 +103,9 @@ public class AddActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        saveNote();
         Intent intent = new Intent(AddActivity.this,MainActivity.class);
+        intent.putExtra("saveOnBack","Note saved as draft!");
         startActivity(intent);
         finish();
     }
@@ -120,6 +122,20 @@ public class AddActivity extends AppCompatActivity {
         }
         else{
             SnackbarHelper.snackShort(parentView,"Could not insert data.");
+        }
+    }
+
+    public void saveNote(){
+        MaterialEditText title = findViewById(R.id.add_title);
+        MaterialEditText description = findViewById(R.id.description);
+        if(title.length()==0){
+            title.setText(R.string.untitled);
+        }
+        if(description.length()!=0){
+            Note note = new Note(title.getText().toString(),description.getText().toString(),starred);
+            insert(note);
+            title.setText("");
+            description.setText("");
         }
     }
 
